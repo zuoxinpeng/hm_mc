@@ -1,0 +1,119 @@
+<jsp:root version="2.1" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:win="http://www.aggrepoint.com/winlet"
+	xmlns:input="urn:jsptagdir:/WEB-INF/tags/winlet/html/input">
+	
+    <jsp:directive.page language="java" contentType="text/xml; charset=UTF-8" pageEncoding="UTF-8" />
+    <div class="section">
+    <h3>日志功能列表</h3>
+    <style type="text/css">
+      .table_new1 td, .table_new1 th {
+        border: 1px solid #919599;
+        height: 28px;
+        padding: 0 3px;
+      }
+    </style>
+     <div class="table-box">
+        <table class="table_new1" width="100%" border="0" cellpadding="0" cellspacing="0" id="tbList">
+            <tr class="titleBg">
+            	<th>序号</th>
+				<th><a href="javascript:win$.get(null, {sortby: 'jobGroup', sort:'${param.sortby == 'jobGroup' and param.sort == 'asc' ? 'desc' : 'asc'}'})">任务分组</a></th>
+				<th><a href="javascript:win$.get(null, {sortby: 'jobName', sort:'${param.sortby == 'jobName' and param.sort == 'asc' ? 'desc' : 'asc'}'})">任务名称</a></th>
+				<th><a href="javascript:win$.get(null, {sortby: 'jobStatus', sort:'${param.sortby == 'jobStatus' and param.sort == 'asc' ? 'desc' : 'asc'}'})">任务状态</a></th>
+				<th><a href="javascript:win$.get(null, {sortby: 'isConcurrent', sort:'${param.sortby == 'isConcurrent' and param.sort == 'asc' ? 'desc' : 'asc'}'})">运行状态</a></th>
+				<th><a href="javascript:win$.get(null, {sortby: 'cronExpression', sort:'${param.sortby == 'cronExpression' and param.sort == 'asc' ? 'desc' : 'asc'}'})">时间表达式</a></th>
+				<th><a href="javascript:win$.get(null, {sortby: 'description', sort:'${param.sortby == 'description' and param.sort == 'asc' ? 'desc' : 'asc'}'})">任务描述</a></th>
+				<th>操作</th>
+            </tr>
+            <tbody>
+                <c:forEach var="li" items="${mcBasScheduleJob.list}" varStatus="status">
+                    <tr>
+						<td>${status.index + 1 }</td>
+						<td>${li.jobGroup}</td>
+						<td>${li.jobName}</td>
+						<td>
+                        	<c:if test="${li.jobStatus eq '0'}">已禁用</c:if>
+			                <c:if test="${li.jobStatus eq '1'}">已启用</c:if>
+			                <c:if test="${li.jobStatus eq '2'}">已删除</c:if>
+						</td>
+						<td>
+							<c:if test="${li.isConcurrent eq '1'}">正常状态</c:if>
+			                <c:if test="${li.isConcurrent eq '0'}">暂停状态</c:if>
+						</td>
+						<td>${li.cronExpression}</td>
+						<td>${li.description}</td>
+						<td style="text-align:left;">
+							<span class="btn_p_duty" style="margin-left:5px;"><input id="btn_add" type="button" value="修改时间表达式" onclick="javascript:win$.post('editMcBasScheduleJob', {jobId: '${li.jobId}'})"/> </span>
+							
+							 <c:if test="${li.jobStatus eq '0'}">
+		                    	 <span class="btn_p_duty" style="margin-left:3px;" >
+		                    		<input id="btn_add" type="button" value="启用" onclick="${win:func('changeStatus')}('${li.jobId}','start')"/>
+		                    	</span>
+		                    	
+							</c:if>
+							
+		                    <c:if test="${li.jobStatus eq '1'}">
+		                    	<span class="btn_p_duty" style="margin-left:3px;" >
+		                    		<input id="btn_add" type="button" value="禁用" onclick="${win:func('changeStatus')}('${li.jobId}','stop')"/>
+		                    	</span>
+		                    	<c:if test="${li.isConcurrent eq '1'}">
+			                    	<span class="btn_p_duty"  style="margin-left:3px;">
+		                    			<input id="btn_add" type="button" value="暂停" onclick="${win:func('changeStatus')}('${li.jobId}','pause')"/>
+			                    	</span>
+					             </c:if>
+			                    <c:if test="${li.isConcurrent eq '0'}">
+			                    	<span class="btn_p_duty"  style="margin-left:3px;">
+		                    			<input id="btn_add" type="button" value="恢复" onclick="${win:func('changeStatus')}('${li.jobId}','resume')"/>
+			                    	</span>
+								</c:if>
+		                  	</c:if>
+                  		  <c:if test="${li.jobStatus ne '2'}">
+                  		  		<c:if test="${li.jobStatus eq '1'}">
+		                    	<span class="btn_p_duty"  style="margin-left:3px;">
+		                    		<input id="btn_add" type="button" value="立即执行一次" onclick="${win:func('changeStatus')}('${li.jobId}','run')"/>
+		                    	</span>
+		                    	</c:if>
+		                    	<span class="btn_p_duty" style="margin-left:3px;">
+		                    		<input id="btn_add" type="button" value="删除" onclick="${win:func('deleteTask')}('${li.jobId}')"/> 
+		                    	</span>
+		                 </c:if>
+						</td>
+					</tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <input:page name="page" currentPage="${mcBasScheduleJob.currentPage}" totalPage="${mcBasScheduleJob.totalPage }" />
+    <script type="text/javascript">
+
+		${win:funcdef('changeStatus')}(jobId, cmd) {
+    		var pardata = {
+    			jobId : jobId,
+    			cmd : cmd
+           	};
+    		$.ajax({
+        		url: win$.url("changeJobStatus"),
+        		data: pardata,
+        		type: "post",
+        		dataType: 'text',
+        		success: function(result){
+        			alert(result);
+        			location.reload();
+        		},
+        		exception : function(result) {
+                    alert(result);
+                    location.reload();
+                }
+        	});
+		}
+
+		${win:funcdef('deleteTask')}(jobId) {
+			if(!confirm("确定删除吗？")){
+				return false;
+			}
+			javascript:win$.post('delMcBasScheduleJob', {'jobId':jobId});
+		}
+	</script>
+</jsp:root>

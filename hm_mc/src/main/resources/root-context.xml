@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<context:property-placeholder location="classpath*:jdbc.properties" />
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.url}"
+		p:username="${jdbc.username}" p:password="${jdbc.password}" />
+
+	<!-- Hibernate -->
+	<bean id="hibernateSessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.hm.domain,com.quartz.base.task.domain" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.generate_statistics">${hibernate.generate_statistics}</prop>
+				<prop key="hibernate.query.substitutions">true 1, false 0</prop>
+				<prop key="hibernate.cache.use_query_cache">${hibernate.use_query_cache}</prop>
+				<prop key="hibernate.cache.use_second_level_cache">${hibernate.use_second_level_cache}</prop>
+				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
+				<prop key="hibernate.connection.SetBigStringTryClob">true</prop>
+			</props>
+		</property>
+		<property name="entityInterceptor">
+			<bean class="com.aggrepoint.dao.AuditTrailInterceptor" />
+		</property>
+	</bean>
+
+	<!-- 事务处理 -->
+	<bean id="hibernateTransactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+		p:sessionFactory-ref="hibernateSessionFactory" />
+
+	<tx:annotation-driven transaction-manager="hibernateTransactionManager"
+		proxy-target-class="true" />
+
+	<tx:advice id="txAdvice" transaction-manager="hibernateTransactionManager">
+		<tx:attributes>
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="query*" read-only="true" />
+			<tx:method name="check*" read-only="true" />
+			<tx:method name="create*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="update*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="delete*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<context:component-scan base-package="com.hm.svcImpl,com.quartz.base.task.service" />
+
+	<bean class="com.aggrepoint.dao.HibernateDaoScannerConfigurer" p:basePackage="com.hm.dao,com.quartz.base.task.dao" />
+		
+	<!--导入任务调度配置文件	--> 
+	<import resource="quartz.xml"/>
+	<bean id="SendMcMessagedBean" class="com.hm.svcImpl.webservice.SendMcMessageService"/>
+</beans>

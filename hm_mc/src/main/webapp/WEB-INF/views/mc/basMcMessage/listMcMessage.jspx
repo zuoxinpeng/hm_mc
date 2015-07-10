@@ -1,0 +1,61 @@
+<jsp:root version="2.1" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:win="http://www.aggrepoint.com/winlet"
+	xmlns:input="urn:jsptagdir:/WEB-INF/tags/winlet/html/input">
+    <jsp:directive.page language="java" contentType="text/xml; charset=UTF-8" pageEncoding="UTF-8" />
+    <div class="section">
+    	<div class="table-box">
+        	<table class="table_new1" width="100%" border="0" cellpadding="0" cellspacing="0" id="tbList">
+            	<tr class="titleBg">
+	                <th width="5%">序号</th>
+	                <th width="25%">
+	                	<a href="javascript:win$.get(null, {sortby: 'receiver', sort:'${param.sortby == 'receiver' and param.sort == 'asc' ? 'desc' : 'asc'}'})">接收人</a>
+	                </th>
+	                <th width="45%">
+	                	<a href="javascript:win$.get(null, {sortby: 'content', sort:'${param.sortby == 'content' and param.sort == 'asc' ? 'desc' : 'asc'}'})">短信内容</a>
+	                </th>
+	                <th width="5%">
+	                	<a href="javascript:win$.get(null, {sortby: 'status', sort:'${param.sortby == 'status' and param.sort == 'asc' ? 'desc' : 'asc'}'})">发送状态</a>
+	                </th>
+	                <th width="15%">
+	                	<a href="javascript:win$.get(null, {sortby: 'createTime', sort:'${param.sortby == 'createTime' and param.sort == 'asc' ? 'desc' : 'asc'}'})">创建时间</a>
+	                </th>
+	                <th width="5%">操作</th>
+            	</tr>
+            <tbody>
+            <c:forEach var="li" items="${basMcMessage.list}" varStatus="status">
+                <tr>
+                	<td>${status.index + 1}</td>
+                    <td title="${li.receiver}">
+                    	${fn:substring(li.receiver, 0, 40)} 
+                    </td>
+                    <td title="${li.content}">
+                    	${fn:substring(li.content, 0, 40)} 
+                    </td>
+                    <td>
+                    	<c:if test="${li.status eq '1'}">待发送</c:if>
+						<c:if test="${li.status eq '2'}">已发送</c:if>
+						<c:if test="${li.status eq '3'}">发送失败</c:if>
+                    </td>
+                    <td>
+                        <fmt:formatDate value='${li.createTime}' type="date" pattern="yyyy-MM-dd HH:mm:ss" />
+                    </td>
+                    <td>
+                        <a href="javascript:win$.post('editBasMcMessage', {messageId: '${li.messageId}'})" title="查看详情">详情</a>
+                    </td>
+                </tr>
+           	</c:forEach>
+            </tbody>
+        </table>
+    </div>
+    <div class="sub_btn_right margin_top_4 clearfix">
+	    <span class="btn_p_duty" > 
+	    	<input type="button" value="发送短信" onclick="javascript:win$.post('addBasMcMessage')"/>
+	    </span>
+  	</div>
+    </div>
+    <input:page name="page" currentPage="${basMcMessage.currentPage}" totalPage="${basMcMessage.totalPage }" />
+</jsp:root>

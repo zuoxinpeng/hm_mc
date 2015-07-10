@@ -1,0 +1,67 @@
+<jsp:root version="2.1" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:win="http://www.aggrepoint.com/winlet"
+	xmlns:input="urn:jsptagdir:/WEB-INF/tags/winlet/html/input">
+    <jsp:directive.page language="java" contentType="text/xml; charset=UTF-8" pageEncoding="UTF-8" />
+    <win:form name="frmEdit" action="save" method="post" validate="yes" resetref="${ps[w.EDIT_KEY]}">
+        <div id="template_modify" class="dialogDiv" style="width:500px;height:400px">
+            <link type="text/css" rel="stylesheet" href="/messagecenter/resources/css/base/validate.css"></link>
+            <div id="template_add" class="section">
+                <h3>短信发送</h3>
+                <div class="table-box">
+                    <table class="tbl_Sch">
+                        <tr>
+                            <th><span style="color: red">*</span>接收人：</th>
+                            <td>
+                                <input type="text" class="code_150" style="width:45%;" name="receiver" id="txtReceiverEdit" value="${basMcMessage.receiver}" title="短信接收号码多个电话可按照”,”分隔" maxlength="256" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>组ID：</th>
+                            <td>
+                                <input type="text" class="code_150" style="width:45%;" name="grpId" id="txtGrpIdEdit" value="${basMcMessage.grpId}" title="组ID" maxlength="10" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span style="color: red">*</span>短信内容：</th>
+                            <td>
+                            	<textarea name="content" id="txtContentEdit" style="width:95%;height:200px;overflow:auto;" title="短信内容" maxlength="2000">${basMcMessage.content}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>发送时间：</th>
+                            <td>
+                            <c:if test="${basMcMessage.messageId gt 0}">
+                            	<fmt:formatDate value='${basMcMessage.sendTime}' type="date" pattern="yyyy-MM-dd HH:mm:ss" />
+                            </c:if>
+                            <c:if test="${basMcMessage.messageId eq 0}">
+                            	<input type="text" class="code_150" style="width:45%;" name="sendTime" id="txtSendTimeEdit" value="${basMcMessage.sendTime}" title="发送开始时间" maxlength="20" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+                            </c:if>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class=" txt-center margin_top_4 clearfix"> 
+                <c:if test="${basMcMessage.messageId eq 0}">
+                	<span class="btn_p_duty" style="margin-right:50px;"><input type="submit" value="发送短信" /></span>
+                </c:if>
+                    <span class="btn_p_duty">  <input type="button" onclick="javascript:win$.post('cancel')" value="关闭" /></span>
+                </div>
+            </div>
+        </div>
+    </win:form>
+    
+<script type="text/javascript">
+    $(function() {
+        if (${basMcMessage.messageId} > 0) {
+            $("#txtReceiverEdit").attr("disabled", "disabled");
+            $("#txtGrpIdEdit").attr("disabled", "disabled");
+            $("#txtContentEdit").attr("disabled", "disabled");
+            $("#txtSendTimeEdit").attr("disabled", "disabled");
+        } 
+    });
+</script>    
+</jsp:root>

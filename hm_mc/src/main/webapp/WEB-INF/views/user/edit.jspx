@@ -1,0 +1,31 @@
+<jsp:root version="2.1" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:win="http://www.aggrepoint.com/winlet"
+	xmlns:input="urn:jsptagdir:/WEB-INF/tags/winlet/html/input">
+	<jsp:directive.page language="java"
+		contentType="text/xml; charset=UTF-8" pageEncoding="UTF-8" />
+
+	<win:form name="frmEdit" action="save" method="post" validate="yes" resetref="${ws[w.EDIT_KEY]}">
+		<div>
+			<label>姓名：</label>
+			<input:text name="name" value="${user.name}" size="5" error="请输入客户名称。" />
+		</div>
+		<div>
+			<label>职位：</label>
+			<input:text name="title" value="${user.title}" size="8" error="请输入客户职位。" />
+		</div>
+		<div>
+			<label>账号：</label>
+			<input:text name="loginId" value="${user.loginId}" size="5" error="请输入客户账号。" />
+		</div>
+		<div>
+			<label>密码：</label>
+			<input:password name="password" value="${user.password}" size="8" error="请输入客户密码。" />
+		</div>
+		<div>
+			<input type="submit" value="保存" /><input type="button" onclick="javascript:win$.post('cancel')" value="取消" />
+		</div>
+	</win:form>
+</jsp:root>

@@ -1,0 +1,46 @@
+<jsp:root version="2.1" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:win="http://www.aggrepoint.com/winlet"
+	xmlns:input="urn:jsptagdir:/WEB-INF/tags/winlet/html/input">
+	<jsp:directive.page language="java" contentType="text/xml; charset=UTF-8" pageEncoding="UTF-8" />
+	
+    <win:form name="frmQuery" method="post" action="loginCheck" validate="yes">
+     
+        <div class="loginwrap">
+            <h3 class="login-gstit" style="background-image:none;"><img style=" position:relative; top:-5px;" src="/messagecenter/resources/image/base/login/logo.jpg" alt="Huimai"/></h3>
+            <div class="loginwrap-right">
+                <h2 class="login-tit"><img src="/messagecenter/resources/image/base/login/img_login.gif" alt="login" /></h2>
+                <div class="login-form">
+                    <fieldset>
+                        <legend>登录</legend>
+                        <dl> <dt><label for="id">用户名</label></dt>
+                            <dd>
+                                <input type="text" id="loginId" name="loginId" value="" class="login-input" />
+                            </dd> <dt><label for="pwd">密码</label></dt>
+                            <dd>
+                                <input type="password" id="password" name="password" value="" class="login-input" />
+                            </dd>
+                            <dd class="rememberid" style="overflow:visible;">                                  
+                                  <label id="message" style="color:red; width:150px; display:block;"></label>
+                              </dd>
+                        </dl>
+                        <button id="login" type="submit" class="login-submit">登录</button>
+                    </fieldset>
+                </div>
+               <ul class="login-notice">
+                    <li>负责人之外非法使用时会受到法律制裁.</li>
+                    <li>密码丢失的话联系询问管理人</li>
+                    <li>询问电话 : Tel. 400-707-0707</li>
+                </ul>
+            </div>
+        </div>
+        <div class="login-copyright">Copyright 2007-2014 北京惠买时空商贸有限公司版权所有 京ICP备10000427号 京ICP证100825号 京公网安备:1101054941</div>
+    </win:form>
+    <script type="text/javascript">
+         $(function(){
+               $("#validate_res_loginId,#validate_res_password").appendTo($("#message").get(0));
+         })
+    </script>
+</jsp:root>

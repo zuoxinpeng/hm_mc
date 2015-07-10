@@ -1,0 +1,70 @@
+<jsp:root version="2.1" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:input="urn:jsptagdir:/WEB-INF/tags/winlet/html/input"
+	xmlns:win="http://www.aggrepoint.com/winlet">
+	<jsp:directive.page language="java"
+		contentType="text/xml; charset=UTF-8" pageEncoding="UTF-8" />
+
+	<div class="section">
+     <div class="table-box">
+         <table class="table_new1" id="tbList">
+             <thead>
+	             <tr>
+	             	 <th>序号</th>
+	               	 <th>编码</th>
+	                 <th colspan="${sysSize}">系统</th>
+	             </tr>
+             </thead>
+             <tbody>
+	            <c:forEach var="mcTemplate" items="${mcTemplateList.list}" varStatus="status" >
+					<tr>
+						<td>${status.index + 1 }</td>
+						<td>${mcTemplate.templateEncode}</td>
+						<c:forEach var="mcBasSystem" items="${mcBasSystemList}">	
+							 	
+							<td> ${mcBasSystem.systName}
+							<c:set var="flag" value="0"/>
+								<c:forEach var="mcSysTemplate" items="${mcSysTemplateList}">	
+									 <c:if test="${(mcTemplate.templateId == mcSysTemplate.templateId) and (mcBasSystem.systId == mcSysTemplate.systId)}">
+									 	<c:set var="flag" value="1"/>
+										  <input id="${mcBasSystem.systId}" type="checkbox" checked="checked" name="systName"  onclick="${win:func('addTemplateAllot')}('${mcTemplate.templateId}','${mcBasSystem.systId}')"/>
+									 </c:if>	
+								</c:forEach>
+								<c:if test="${flag != 1 }">
+									<input id="${mcBasSystem.systId}" type="checkbox" name="systName"  onclick="${win:func('addTemplateAllot')}('${mcTemplate.templateId}','${mcBasSystem.systId}')"/>
+								</c:if>
+							</td>	
+						</c:forEach>
+					</tr>
+			 	</c:forEach>
+             </tbody>
+         </table>
+     </div>
+ </div>
+	 <!-- 分页结束 -->
+	<input:page name="page" currentPage="${mcTemplateList.currentPage}" totalPage="${mcTemplateList.totalPage }" />
+	
+	<script>
+	${win:funcdef('addTemplateAllot')}(templateId,systId) {
+		$.ajax({
+   	 		async: false,
+	 		type: 'post',
+	  		url: win$.url("addTemplateAllot"),
+			 data: {'templateId': templateId,'systId':systId},
+ 			dataType: 'json',
+			success: function(data){
+				if(data.state > 0){
+					alert("编码:" +data.templateEncode + "给" + data.sysName +"系统分配成功");
+					return false;
+				}else{
+					alert("取消编码:" +data.templateEncode + "分配给" + data.sysName +"系统成功");
+				}
+			}
+
+		});
+	}
+
+	</script>	
+</jsp:root>
