@@ -1,0 +1,7 @@
+@charset "utf-8";
+.win_valfailed{
+                display:inline-block;
+                width:50%;
+                margin-left:10px;
+                color:red;
+             }

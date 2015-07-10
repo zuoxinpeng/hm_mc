@@ -1,0 +1,49 @@
+<jsp:root version="2.1" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:input="urn:jsptagdir:/WEB-INF/tags/winlet/html/input"
+	xmlns:win="http://www.aggrepoint.com/winlet">
+	<jsp:directive.page language="java"
+		contentType="text/xml; charset=UTF-8" pageEncoding="UTF-8" />
+
+	<input type="button" value="添加" onclick="javascript:win$.post('addUser')"/>
+	<table class="styled">
+		<tr>
+			<th><a href="javascript:win$.get({sortby: 'name', sort:'asc'})">姓名</a></th>
+			<th><a href="javascript:win$.get({sortby: 'title', sort:'asc'})">职位</a></th>
+			<th><a href="javascript:win$.get({sortby: 'loginid', sort:'asc'})">账号</a></th>
+			<th>操作</th>
+		</tr>
+		<tbody>
+			<c:forEach var="user" items="${users.list}">
+			<tr>
+				<td>${user.name}</td>
+				<td>${user.title}</td>
+				<td>${user.loginId}</td>
+				<td>
+					<a href="javascript:win$.post('delUser', {userid: '${user.id}'})">删除</a>
+					<a href="javascript:win$.post('editUser', {userid: '${user.id}'})">编辑</a>
+				</td>
+			</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	
+	<!-- 分页结束 -->
+	<input:page name="page" currentPage="${users.currentPage}" totalPage="${users.totalPage }" />
+	
+	<div class="listpaging">
+		<div class="info">
+			共${users.totalCount}个符合条件的用户，分${users.totalPage}页显示，当前显示第${users.currentPage}页
+		</div>
+		<div class="paging">
+			<c:forEach var="page" begin="1" end="${users.totalPage}">
+				<c:choose>
+					<c:when test="${page eq users.currentPage}">${page}</c:when>
+					<c:otherwise><a href="javascript:win$.get({page: '${page}'})">${page}</a></c:otherwise>
+				</c:choose>
+			</c:forEach>
+		</div>
+	</div>
+</jsp:root>

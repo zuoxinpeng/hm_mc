@@ -1,0 +1,106 @@
+<jsp:root version="2.1" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:input="urn:jsptagdir:/WEB-INF/tags/winlet/html/input"
+	xmlns:win="http://www.aggrepoint.com/winlet">
+	<jsp:directive.page language="java"
+		contentType="text/xml; charset=UTF-8" pageEncoding="UTF-8" />
+
+	<div class="section">
+     <div class="table-box">
+         <table class="table_new1" id="tbList">
+             <thead>
+	             <tr>
+	             	 <th>序号</th>
+	               	 <th>编码</th>
+	                 <th>短信</th>
+	                 <th>邮件</th>
+	                 <th>站内信</th>
+	                 <th>IMO</th>
+	                 <th>操作</th>
+	             </tr>
+             </thead>
+              <tbody>
+	            <c:forEach var="mcTemplate" items="${mcTemplates.list}" varStatus="status">
+					<tr>
+						<td>
+							${status.index + 1 }
+							<input type="hidden" name="templateId" class="ipt" value="${mcTemplate.templateId}" maxlength="20" />
+						</td>
+						<td>${mcTemplate.templateEncode}</td>
+						<td>
+							<c:set var="tempFlag" value="0"/>
+							<c:forEach var="mcTemplateDetail" items="${mcTemplateDetailList}">
+								<c:if test="${mcTemplateDetail.templateId == mcTemplate.templateId and mcTemplateDetail.templateTypeId == 1}">
+										<c:set var="tempFlag" value="1"/>
+										<a class="table_control" href="javascript:win$.post('editMcTemplateDetail', {templateId: '${mcTemplate.templateId}' ,templateTypeId:' ${1}'})">编辑</a>
+								</c:if>
+							</c:forEach>
+							<c:if test="${tempFlag==0}">
+								<a class="table_control" href="javascript:win$.post('editMcTemplateDetail', {templateId: '${mcTemplate.templateId}' ,templateTypeId:' ${1}'})">添加</a>
+							</c:if>
+						</td>
+						
+						<td>
+							<c:set var="tempFlag" value="0"/>
+							<c:forEach var="mcTemplateDetail" items="${mcTemplateDetailList}">
+								<c:if test="${mcTemplateDetail.templateId == mcTemplate.templateId and mcTemplateDetail.templateTypeId == 2}">
+										<c:set var="tempFlag" value="1"/>
+										<a class="table_control" href="javascript:win$.post('editMcTemplateDetail', {templateId: '${mcTemplate.templateId}' ,templateTypeId:' ${2}'})">编辑</a>
+								</c:if>
+							</c:forEach>
+							<c:if test="${tempFlag==0}">
+								<a class="table_control" href="javascript:win$.post('editMcTemplateDetail', {templateId: '${mcTemplate.templateId}' ,templateTypeId:' ${2}'})">添加</a>
+							</c:if>
+						</td>
+						
+						<td>
+							<c:set var="tempFlag" value="0"/>
+							<c:forEach var="mcTemplateDetail" items="${mcTemplateDetailList}">
+								<c:if test="${mcTemplateDetail.templateId == mcTemplate.templateId and mcTemplateDetail.templateTypeId == 3}">
+										<c:set var="tempFlag" value="1"/>
+										<a class="table_control" href="javascript:win$.post('editMcTemplateDetail', {templateId: '${mcTemplate.templateId}' ,templateTypeId:' ${3}'})">编辑</a>
+								</c:if>
+							</c:forEach>
+							<c:if test="${tempFlag==0}">
+								<a class="table_control" href="javascript:win$.post('editMcTemplateDetail', {templateId: '${mcTemplate.templateId}' ,templateTypeId:' ${3}'})">添加</a>
+							</c:if>
+						</td>
+						
+						<td>
+							<c:set var="tempFlag" value="0"/>
+							<c:forEach var="mcTemplateDetail" items="${mcTemplateDetailList}">
+								<c:if test="${mcTemplateDetail.templateId == mcTemplate.templateId and mcTemplateDetail.templateTypeId == 4}">
+										<c:set var="tempFlag" value="1"/>
+										<a class="table_control" href="javascript:win$.post('editMcTemplateDetail', {templateId: '${mcTemplate.templateId}' ,templateTypeId:' ${4}'})">编辑</a>
+								</c:if>
+							</c:forEach>
+							<c:if test="${tempFlag==0}">
+								<a class="table_control" href="javascript:win$.post('editMcTemplateDetail', {templateId: '${mcTemplate.templateId}' ,templateTypeId:' ${4}'})">添加</a>
+							</c:if>
+						</td>
+						
+						<td>
+							<a href="javascript:void(0);" onclick="javascript:${win:func('deleteTemplate')}('${mcTemplate.templateId}')"><span>删除  </span></a>
+						</td>
+					</tr>
+				</c:forEach>
+             </tbody>
+         </table>
+     </div>
+      <div class="sub_btn_right margin_top_4 clearfix">
+        <span class="btn_p_duty" > <input type="button" value="添加模板" onclick="javascript:win$.post('addMcTemplate')"/></span>
+     </div>
+ </div>
+	 <!-- 分页结束 -->
+	<input:page name="page" currentPage="${mcTemplates.currentPage}" totalPage="${mcTemplates.totalPage }" />
+ <script type="text/javascript">
+		${win:funcdef('deleteTemplate')}(templateId) {
+			if(!confirm("确定删除吗？")){
+				return false;
+			}
+			javascript:win$.post('delMcTemplate', {'templateId':templateId});
+		}
+	</script>
+</jsp:root>

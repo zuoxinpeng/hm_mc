@@ -1,0 +1,24 @@
+<jsp:root version="2.1" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:win="http://www.aggrepoint.com/winlet">
+	<jsp:directive.page language="java"
+		contentType="text/xml; charset=UTF-8" pageEncoding="UTF-8" />
+	
+	<win:form name="frmQuery" method="get" update="listWin">
+		<div class="table-box">
+            <table class="tbl_Sch">
+                <tr>
+					<th>登陆账号</th>
+                    <td>
+                    	<input type="text" name="searchLoginId" value="${param.searchLoginId}"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="sub_btn_right margin_top_4">
+        	<span class="btn_basic" ><input type="submit" value="查询"/></span>
+        </div>
+	</win:form>
+</jsp:root>

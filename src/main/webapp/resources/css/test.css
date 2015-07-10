@@ -1,0 +1,15 @@
+body {font-family:"\5b8b\4f53"; font-size:12px}
+
+table.styled {border-collapse: collapse; border: 1px solid #666666; color: #363636; background: #cccccc; text-align:left; width:100%}
+table.styled th {padding:2px; background:url(../images/gloss1.png) repeat-x left center; text-align:center; height:25px; border-bottom:1px solid #D0D0D0; border-left:1px solid #D0D0D0;}
+table.styled td {padding:5px; background: #f6f6f6; border-bottom:1px solid #D0D0D0; border-left:1px solid #D0D0D0;}
+table.styled td.highlight {background: #E2E2E2;}
+table.styled a {color: #333333; text-decoration:none; border-bottom:1px dotted #FF0000; margin-left:2px; margin-right:2px}
+table.styled a:hover {text-decoration:underline; border-bottom:0px }
+table.styled tr.odd {background: #f1f1f1;}
+
+form div {padding: 2px}
+
+.win_valfailed {background:url(../images/stop.png) no-repeat left center; padding: 2px 0px 2px 20px; margin: 0px 1px 0px 1px; color:#7C0000}
+.win_valpassed {background:url(../images/go.png) no-repeat left center; padding: 2px 0px 2px 20px; margin: 0px 1px 0px 1px}
+.win_validating {background:url(../images/validate.gif) no-repeat left center; padding: 2px 0px 2px 20px; margin: 0px 1px 0px 1px}

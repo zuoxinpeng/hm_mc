@@ -1,0 +1,127 @@
+<jsp:root version="2.1" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:win="http://www.aggrepoint.com/winlet">
+    
+    
+    <jsp:directive.page language="java" contentType="text/xml; charset=UTF-8" pageEncoding="UTF-8" />
+ 
+    <win:form name="frmEdit" action="saveTemplate" method="post" validate="yes">
+        <div id="template_modify" class="dialogDiv" style="width:500px;">
+   		 <link type="text/css" rel="stylesheet" href="/messagecenter/resources/css/base/validate.css"></link>
+            <c:if test="${viewKey == 'add'}">
+                <div id="template_add" class="section">
+                    <h3>模板添加</h3>
+                    <div class="table-box">
+                        <table class="tbl_Sch">
+                            <tr>
+                                <th>模板编码</th>
+                                <td>
+                                    <input type="text" class="code_150"  style="width:45%;" value="" name="templateEncode" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class=" txt-center margin_top_4 clearfix"> <span class="btn_p_duty" style="margin-right:50px;"><input type="submit" value="保存" /></span>
+	                <span class="btn_p_duty">  <input type="button" onclick="javascript:win$.post('cancel')" value="关闭" /></span>
+	              </div>
+                </div>
+            </c:if>
+        </div>
+    </win:form>
+	<win:form name="frmEdit2" action="saveTemplateDetail" method="post" validate="yes">
+		<div id="template_modify" class="dialogDiv" style="width:500px;">
+            <c:if test="${viewKey == 'edit'}">
+                <div class="section">
+                  <div class="table-box">
+                    <table class="tbl_Sch">
+                     <c:if test="${templateTypeId gt 1}">
+                        <tr>
+                            <th><span style="color: red">*</span>标题</th>
+                            <td>
+                                <input type="text" name="templateTitle" class="ipt" value="${mcTemplateDetail.templateTitle}" maxlength="50" />
+                            </td>
+                        </tr>
+                      </c:if>
+                        <tr>
+                            <th ><span style="color: red">*</span>内容：</th>
+                            <td>
+                            	<input type="hidden" name="templateId" class="ipt" value="${templateId}" maxlength="50" />
+                                <input type="hidden" name="templateTypeId" class="ipt" value="${templateTypeId}" maxlength="50" />
+                                <input type="hidden" name="templateDetailId" class="ipt" value="${mcTemplateDetail.templateDetailId}" maxlength="50" />
+                                <textarea name="templateContent" id="content" style="width:100%;height:200px;overflow:auto;">${mcTemplateDetail.templateContent}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>备注：</th>
+                            <td>
+                                <textarea name="templateRemark" id="remark" style="width:100%;height:60px;overflow:auto;">${mcTemplateDetail.templateRemark}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>是否启用模板：</th>
+                            <td>
+                                <span class="check_label">
+                                  <input type="radio" name="templateStatus" id="enable" value="1" />
+                                  <label>启用</label>
+                                </span> 
+                                <span class="check_label">
+                                   <input type="radio" name="templateStatus" id="disable" value="2" checked="checked" />
+                                   <label>禁用</label>
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                     <div class=" txt-center margin_top_4 clearfix"> <span class="btn_p_duty" style="margin-right:50px;"><input type="submit" id="btn_submit" value="保存" /></span>
+	                    <span class="btn_p_duty">  <input type="button" onclick="javascript:win$.post('cancel')" value="关闭" /></span>
+	                </div>
+	                </div>
+          	 </div>
+          </c:if>
+        </div>
+    </win:form>
+    
+   	<c:if test="${templateTypeId eq 2 || templateTypeId eq 3}">
+   		<script type="text/javascript">
+			
+			var editor;
+			editor = KindEditor.create('#content',{
+                    width:'100%',
+					resizeType : 1,
+					allowPreviewEmoticons : false,
+					allowImageUpload : false,
+					items : [
+						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+						'insertunorderedlist']
+				});
+
+            var status = "${mcTemplateDetail.templateStatus}";
+			if(status == 1){
+				$("#enable").attr("checked","checked");
+			}
+			if(status == 2){
+				$("#disable").attr("checked","checked");
+			}
+
+			$("#btn_submit").click(function(){
+                  if(editor){
+					 $("#content").val(editor.html());
+				}
+            });
+			
+		</script>
+   	</c:if>
+   	<c:if test="${templateTypeId eq 1}">
+   	 	<script type="text/javascript">
+			var status = "${mcTemplateDetail.templateStatus}";
+			if(status == 1){
+				$("#enable").attr("checked","checked");
+			}
+			if(status == 2){
+				$("#disable").attr("checked","checked");
+			}
+		</script>
+   	 </c:if>
+</jsp:root>
