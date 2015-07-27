@@ -49,8 +49,7 @@ public interface IMcBasImoService extends HibernateService<McBasImo> {
 	 *            排序顺序
 	 * @return 数据列表的强类型实体类
 	 */
-	public abstract PageList<McBasImo> findByReceiver(
-			java.lang.String receiver, // IMO接收人
+	public abstract PageList<McBasImo> findByReceiver(java.lang.String receiver, // IMO接收人
 			String order, // 排序字段
 			String orderDir, // 排序顺序
 			int pageNum, // 当前分页的页数
@@ -59,26 +58,27 @@ public interface IMcBasImoService extends HibernateService<McBasImo> {
 
 	/**
 	 * sendMsg
-	 * @param uid		消息接收者id
-	 * @param title		消息标题
-	 * @param content	消息内容
-	 * @return			接口返回结果
-	 * String
+	 * 
+	 * @param uid
+	 *            消息接收者id
+	 * @param title
+	 *            消息标题
+	 * @param content
+	 *            消息内容
+	 * @return 接口返回结果 String
 	 * @exception
-	 * @since  1.0.0
-	*/
-	public String sendMsg(String uid, String title, String content) ;
-	
-	
+	 * @since 1.0.0
+	 */
+	public String sendMsg(String uid, String title, String content);
+
 	/**
 	 * 通过员工账号获取员工信息
 	 * 
 	 * @param uas
-	 *           所要查询的人员账号（员工账号逗号隔开，最多支持一次获取100个成员）
-	 * @return result  接口返回结果
+	 *            所要查询的人员账号（员工账号逗号隔开，最多支持一次获取100个成员）
+	 * @return result 接口返回结果
 	 */
-	public String getUserInfoByAccounts(String uas) ;
-	
+	public String getUserInfoByAccounts(String uas);
 
 	/**
 	 * 通过员工id获取员工信息
@@ -87,5 +87,5 @@ public interface IMcBasImoService extends HibernateService<McBasImo> {
 	 *            所要查询的人员id（员工id逗号隔开，最多支持一次获取100个成员）
 	 * @return result 接口返回结果
 	 */
-	public String getUserInfoByIds(String uids) ;
+	public String getUserInfoByIds(String uids);
 }

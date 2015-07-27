@@ -37,9 +37,7 @@ public class McBasImoFail implements Serializable {
 	public McBasImoFail() {
 	}
 
-	public McBasImoFail(String receiver,String receiverUid,String subject, String content,
-			String key, long status, String grpId, String errorMessage,
-			Date sendTime, Date createTime, Date updateTime) {
+	public McBasImoFail(String receiver, String receiverUid, String subject, String content, String key, long status, String grpId, String errorMessage, Date sendTime, Date createTime, Date updateTime) {
 		super();
 		this.receiver = receiver;
 		this.receiverUid = receiverUid;
@@ -63,7 +61,7 @@ public class McBasImoFail implements Serializable {
 	 * 获取 IMO接收人, 类型String 默认值:""
 	 */
 	private String receiver;
-	
+
 	/**
 	 * 获取 IMO接收人, 类型String 默认值:""
 	 */
@@ -159,26 +157,25 @@ public class McBasImoFail implements Serializable {
 	public void setReceiver(String sReceiver) {
 		this.receiver = sReceiver;
 	}
-	
+
 	/**
-	* 获取 IMO接收人UID, 类型String 默认值:""
+	 * 获取 IMO接收人UID, 类型String 默认值:""
 	 *
 	 * @return IMO接收人(员工编号), 类型String 默认值:""
 	 */
 	@Column(name = "RECEIVER_UID", length = 256)
-	public String getReceiverUid()
-	{
-		return this.receiverUid; 
+	public String getReceiverUid() {
+		return this.receiverUid;
 	}
+
 	/**
 	 * 设置 IMO接收人UID, 类型String 默认值:""
 	 *
 	 * @param sReceiver
 	 *            IMO接收人(员工编号), 类型String 默认值:""
 	 */
-	public void setReceiverUid(String sreceiverUid)
-	{
-		this.receiverUid = sreceiverUid; 
+	public void setReceiverUid(String sreceiverUid) {
+		this.receiverUid = sreceiverUid;
 	}
 
 	/**

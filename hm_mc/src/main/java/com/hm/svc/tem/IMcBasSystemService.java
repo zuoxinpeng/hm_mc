@@ -43,6 +43,5 @@ public interface IMcBasSystemService extends HibernateService<McBasSystem> {
 	 * @return 数据列表的强类型实体类
 	 */
 	public abstract List<McBasSystem> findByCode(java.lang.String systCode); // 系统代码
-	
 
 }

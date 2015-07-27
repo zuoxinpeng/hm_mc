@@ -42,8 +42,7 @@ public interface IMcTemplateDao extends HibernateDao<McTemplate> {
 	 * @return 数据列表的强类型实体类
 	 */
 	@Find(" from McTemplate where 1=1  #{and lower(templateEncode) = :templateEncode}")
-	public List<McTemplate> findByTemplateEncode(
-			@Param("templateEncode") java.lang.String templateEncode);
+	public List<McTemplate> findByTemplateEncode(@Param("templateEncode") java.lang.String templateEncode);
 
 	/**
 	 * 根据 <br />
@@ -69,8 +68,7 @@ public interface IMcTemplateDao extends HibernateDao<McTemplate> {
 	 * @return 数据列表的强类型实体类
 	 */
 	@Find(" from McTemplate where 1=1  #{and templateEncode like :templateEncode}  #{order by :order :dir}")
-	public PageList<McTemplate> findByEncode(
-			@Like("templateEncode") java.lang.String templateEncode, // 模板编码
+	public PageList<McTemplate> findByEncode(@Like("templateEncode") java.lang.String templateEncode, // 模板编码
 			@Replace("order") String order, // 排序字段
 			@Replace("dir") String orderDir, // 排序顺序
 			@PageNum int pageNum, // 当前分页的页数

@@ -31,7 +31,7 @@ public interface IMcBasEmailFailDao extends HibernateDao<McBasEmailFail> {
 	 * 
 	 * @param sendTimeStart
 	 *            用于区间查询的发送开始时间
-	 *@param sendTimeEnd
+	 * @param sendTimeEnd
 	 *            用于区间查询的发送开始时间
 	 * @param order
 	 *            排序字段
@@ -40,8 +40,7 @@ public interface IMcBasEmailFailDao extends HibernateDao<McBasEmailFail> {
 	 * @return 数据列表的强类型实体类
 	 */
 	@Find(" from McBasEmailFail where 1=1  #{and createTime >= :sendTimeStart and createTime <= :sendTimeEnd}  #{order by :order :dir}")
-	public List<McBasEmailFail> findByTime(
-			@Param("sendTimeStart") java.util.Date sendTimeStart, // 发送开始时间
+	public List<McBasEmailFail> findByTime(@Param("sendTimeStart") java.util.Date sendTimeStart, // 发送开始时间
 			@Param("sendTimeEnd") java.util.Date sendTimeEnd, // 发送开始时间
 			@Replace("order") String order, // 排序字段
 			@Replace("dir") String orderDir// 排序顺序
@@ -66,8 +65,7 @@ public interface IMcBasEmailFailDao extends HibernateDao<McBasEmailFail> {
 	 * @return 数据列表的强类型实体类
 	 */
 	@Find(" from McBasEmailFail where 1=1  #{and lower(receiver) like :receiver}  #{order by :order :dir}")
-	public PageList<McBasEmailFail> findByReceiver(
-			@Like(value = "receiver", prefix = false, suffix = true) java.lang.String receiver,  //短邮件接收人可按照”,”分隔 
+	public PageList<McBasEmailFail> findByReceiver(@Like(value = "receiver", prefix = false, suffix = true) java.lang.String receiver, // 短邮件接收人可按照”,”分隔
 			@Replace("order") String order, // 排序字段
 			@Replace("dir") String orderDir, // 排序顺序
 			@PageNum int pageNum, // 当前分页的页数

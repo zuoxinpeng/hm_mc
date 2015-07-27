@@ -49,8 +49,7 @@ public interface IMcBasPiuUserService extends HibernateService<McBasPiuUser> {
 	 *            每页条数
 	 * @return 数据列表的强类型实体类
 	 */
-	public abstract PageList<McBasPiuUser> findByLoginId(
-			java.lang.String loginId, // 登录账号
+	public abstract PageList<McBasPiuUser> findByLoginId(java.lang.String loginId, // 登录账号
 			String order, // 排序字段
 			String orderDir, // 排序顺序
 			int pageNum, // 当前分页的页数

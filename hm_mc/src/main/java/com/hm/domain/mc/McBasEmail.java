@@ -37,9 +37,7 @@ public class McBasEmail implements Serializable {
 	public McBasEmail() {
 	}
 
-	public McBasEmail(String receiver, String subject, String content,
-			String key, long status, String grpId, String taskType,
-			Date sendTime, Date createTime, Date updateTime) {
+	public McBasEmail(String receiver, String subject, String content, String key, long status, String grpId, String taskType, Date sendTime, Date createTime, Date updateTime) {
 		this.receiver = receiver;
 		this.subject = subject;
 		this.content = content;

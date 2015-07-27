@@ -64,8 +64,7 @@ public interface IMcSysTemplateDao extends HibernateDao<McSysTemplate> {
 	 *            SYS_TEMPLATE_ID
 	 */
 	@Delete("delete McSysTemplate where sysTemplateId = :sysTemplateId ")
-	public int deleteBySysTemplateId(
-			@Param("sysTemplateId") java.lang.Long sysTemplateId // SYS_TEMPLET_ID
+	public int deleteBySysTemplateId(@Param("sysTemplateId") java.lang.Long sysTemplateId // SYS_TEMPLET_ID
 	);
 
 	/**
@@ -97,7 +96,5 @@ public interface IMcSysTemplateDao extends HibernateDao<McSysTemplate> {
 	 */
 	@Find(" from McSysTemplate where 1=1  #{and systId = :systId}")
 	public List<McSysTemplate> findBysystId(@Param("systId") java.lang.Long systId); // 系统ID
-
-
 
 }

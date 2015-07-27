@@ -37,9 +37,7 @@ public class McBasMessageFail implements Serializable {
 	public McBasMessageFail() {
 	}
 
-	public McBasMessageFail(String receiver, String content, String key,
-			long status, String grpId, String mId, String sId, String taskType,
-			String errorMessage, Date sendTime, Date createTime, Date updateTime) {
+	public McBasMessageFail(String receiver, String content, String key, long status, String grpId, String mId, String sId, String taskType, String errorMessage, Date sendTime, Date createTime, Date updateTime) {
 		this.receiver = receiver;
 		this.content = content;
 		this.key = key;

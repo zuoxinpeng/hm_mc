@@ -65,6 +65,5 @@ public interface IMcTemplateService extends HibernateService<McTemplate> {
 	 *            模板主键
 	 */
 	public abstract int deleteById(java.lang.Long templateId);// 模板主键
-	
 
 }

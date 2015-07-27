@@ -26,7 +26,7 @@ public interface IMcBasLogDao extends HibernateDao<McBasLog> {
 	 * CONTENT Content 日志内容<br />
 	 * PRIORITY Priority 日志重要程度（1.重要、2.一般、3.可忽略）<br />
 	 * 返回表T_BAS_MC_LOG 日志表的数据列表<br />
-	 * 开发者 王凯  2014年12月17日 16:38:07
+	 * 开发者 王凯 2014年12月17日 16:38:07
 	 * 
 	 * @param Content
 	 *            日志内容
@@ -43,8 +43,7 @@ public interface IMcBasLogDao extends HibernateDao<McBasLog> {
 	 * @return 数据列表的强类型实体类
 	 */
 	@Find(" from McBasLog where 1=1  #{and lower(content) like :content}  #{and priority = :priority}  #{order by :order :dir}")
-	public PageList<McBasLog> findByContentPriority(
-			@Like("content") java.lang.String content, // 日志内容
+	public PageList<McBasLog> findByContentPriority(@Like("content") java.lang.String content, // 日志内容
 			@Param("priority") java.lang.Long priority, // 日志重要程度（1.重要、2.一般、3.可忽略）
 			@Replace("order") String order, // 排序字段
 			@Replace("dir") String orderDir, // 排序顺序

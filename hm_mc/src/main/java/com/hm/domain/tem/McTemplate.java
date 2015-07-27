@@ -45,7 +45,7 @@ public class McTemplate implements Serializable {
 	 * 获取 模板编码, 类型String 默认值:""
 	 */
 	private String templateEncode;
-	
+
 	/**
 	 * 获取 创建人, 类型String 默认值:""
 	 */

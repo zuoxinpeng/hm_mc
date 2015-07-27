@@ -21,8 +21,7 @@ import com.hm.domain.mc.McBasMessageSuccess;
  * 
  */
 @Component
-public interface IMcBasMessageSuccessDao extends
-		HibernateDao<McBasMessageSuccess> {
+public interface IMcBasMessageSuccessDao extends HibernateDao<McBasMessageSuccess> {
 
 	/**
 	 * 根据 <br />
@@ -41,9 +40,8 @@ public interface IMcBasMessageSuccessDao extends
 	 * @return 数据列表的强类型实体类
 	 */
 	@Find(" from McBasMessageSuccess where 1=1  #{and createTime >= :sendTimeStart and createTime <= :sendTimeEnd}  #{order by :order :dir}")
-	public List<McBasMessageSuccess> findByTime(
-			@Param("sendTimeStart") java.util.Date sendTimeStart, // 发送开始时间
-																	// (查询的使用的开始时间)
+	public List<McBasMessageSuccess> findByTime(@Param("sendTimeStart") java.util.Date sendTimeStart, // 发送开始时间
+																										// (查询的使用的开始时间)
 			@Param("sendTimeEnd") java.util.Date sendTimeEnd, // 发送开始时间(查询使用的结束时间)
 			@Replace("order") String order, // 排序字段
 			@Replace("dir") String orderDir// 排序顺序
@@ -68,8 +66,7 @@ public interface IMcBasMessageSuccessDao extends
 	 * @return 数据列表的强类型实体类
 	 */
 	@Find(" from McBasMessageSuccess where 1=1  #{and lower(receiver) like :receiver}  #{order by :order :dir}")
-	public PageList<McBasMessageSuccess> findByReceiver(
-			@Like(value = "receiver", prefix = false, suffix = true) java.lang.String receiver,  //短信接收号码多个电话可按照”,”分隔
+	public PageList<McBasMessageSuccess> findByReceiver(@Like(value = "receiver", prefix = false, suffix = true) java.lang.String receiver, // 短信接收号码多个电话可按照”,”分隔
 			@Replace("order") String order, // 排序字段
 			@Replace("dir") String orderDir, // 排序顺序
 			@PageNum int pageNum, // 当前分页的页数

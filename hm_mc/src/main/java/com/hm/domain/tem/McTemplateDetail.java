@@ -335,7 +335,7 @@ public class McTemplateDetail implements Serializable {
 	 * 
 	 * @return
 	 */
-	@ManyToOne(targetEntity = McTemplate.class,fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = McTemplate.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEMPLATE_ID", nullable = true, insertable = false, updatable = false)
 	public McTemplate getMcTemplate() {
 		return mcTemplate;

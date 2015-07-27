@@ -55,8 +55,8 @@ public class LoginController {
 	 * @return
 	 */
 	@Action
-	@Return({ @Code(value = "", log = "表单字段验证出错", update = ""), @Code(value = "success", update = "page", log = "用户登录成功"), @Code(value = "vf", log = "AJAX表单字段校验", view = ""),
-			@Code(value = "error", log = "表单字段校验出错", view = ""), @Code(value = "statusError", log = "用户被禁用", msg = "用户被禁用不能登录", view = "") // 用户被禁用则提示不能登录
+	@Return({ @Code(value = "", log = "表单字段验证出错", update = ""), @Code(value = "success", update = "page", log = "用户登录成功"), @Code(value = "vf", log = "AJAX表单字段校验", view = ""), @Code(value = "error", log = "表单字段校验出错", view = ""),
+			@Code(value = "statusError", log = "用户被禁用", msg = "用户被禁用不能登录", view = "") // 用户被禁用则提示不能登录
 	})
 	@Validates({ @Validate(name = "loginId", id = "ne", error = "用户名不能为空"), @Validate(name = "password", id = "ne", error = "密码不能为空") })
 	public String loginCheck(McBasPiuUser puser, PageStorage ps, Validation v, HttpServletRequest req, UserEngine ue) {

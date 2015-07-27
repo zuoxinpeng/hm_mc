@@ -33,17 +33,17 @@ public interface IMcBasLogService extends HibernateService<McBasLog> {
 	 *            每页条数
 	 * @return 数据列表的强类型实体类
 	 */
-	public abstract PageList<McBasLog> findByContentPriority(
-			java.lang.String content, // 日志内容
+	public abstract PageList<McBasLog> findByContentPriority(java.lang.String content, // 日志内容
 			java.lang.Long priority, // 日志重要程度（1.重要、2.一般、3.可忽略）
 			String order, // 排序字段
 			String orderDir, // 排序顺序
 			int pageNum, // 当前分页的页数
 			int pageSize// 每页条数
 	);
-	
+
 	/**
 	 * 添加日志
+	 * 
 	 * @param basMcLog
 	 */
 	public abstract void insertBasMcLog(McBasLog basMcLog);

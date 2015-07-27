@@ -3,7 +3,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:root-context.xml,classpath*:xfire-servlet.xml</param-value>
+		<param-value>classpath*:root-context.xml</param-value>
 	</context-param>
 	<!-- <context-param> <param-name>log4jConfigLocation</param-name> <param-value>/WEB-INF/classes/log4j.properties</param-value> </context-param> -->
 
@@ -34,24 +34,4 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<!-- xfire -->
-	<servlet>
-		<servlet-name>xfire</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>xfire</servlet-name>
-		<url-pattern>*.ws</url-pattern>
-	</servlet-mapping>
-	<!-- 配合Spring容器中XFire一起工作的Servlet -->
-	<servlet>
-		<servlet-name>xfireServlet</servlet-name>
-		<servlet-class>org.codehaus.xfire.spring.XFireSpringServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>xfireServlet</servlet-name>
-		<!-- 在这个URI下开放Web Service服务 -->
-		<url-pattern>/service/*</url-pattern>
-	</servlet-mapping>
-	<!-- end XFire 配置 -->
 </web-app>

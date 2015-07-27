@@ -27,10 +27,10 @@ public class McSysTemplate implements Serializable {
 	private static final long serialVersionUID = 2014111720185832083L;
 
 	/**
-	* 获取 关系主键, 类型long 默认值:0
-	*/
+	 * 获取 关系主键, 类型long 默认值:0
+	 */
 	private long sysTemplateId;
-	
+
 	/**
 	 * 获取 比酷、IVALUE, 类型long 默认值:0
 	 */
@@ -42,7 +42,7 @@ public class McSysTemplate implements Serializable {
 	private long templateId;
 
 	/**
-	* 获取 关系主键, 类型long 默认值:0
+	 * 获取 关系主键, 类型long 默认值:0
 	 *
 	 * @return 关系主键, 类型long 默认值:0
 	 */
@@ -58,7 +58,7 @@ public class McSysTemplate implements Serializable {
 	 * 设置 关系主键, 类型long 默认值:0
 	 *
 	 * @param id
-	 *         关系主键, 类型long 默认值:0
+	 *            关系主键, 类型long 默认值:0
 	 */
 	public void setSysTemplateId(long sysTemplateId) {
 		this.sysTemplateId = sysTemplateId;

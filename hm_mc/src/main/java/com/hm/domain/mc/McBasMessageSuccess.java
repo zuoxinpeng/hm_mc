@@ -37,9 +37,7 @@ public class McBasMessageSuccess implements Serializable {
 	public McBasMessageSuccess() {
 	}
 
-	public McBasMessageSuccess(String receiver, String content, String key,
-			long status, String grpId, String mId, String sId, String taskType,
-			Date sendTime, Date createTime, Date updateTime) {
+	public McBasMessageSuccess(String receiver, String content, String key, long status, String grpId, String mId, String sId, String taskType, Date sendTime, Date createTime, Date updateTime) {
 		this.receiver = receiver;
 		this.content = content;
 		this.key = key;

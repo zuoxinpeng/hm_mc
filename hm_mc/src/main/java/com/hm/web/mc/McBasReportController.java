@@ -26,7 +26,7 @@ public class McBasReportController {
 
 	@Autowired
 	private IMcBasMessageSuccessService basMcMessageSuccessService;
-	
+
 	@Autowired
 	private IMcBasMessageFailService basMcMessageFailService;
 
@@ -35,14 +35,12 @@ public class McBasReportController {
 
 	@Autowired
 	private IMcBasEmailFailService basMcEmailFailService;
-	
+
 	@Autowired
 	private IMcBasImoSuccessService mcBasImoSuccessService;
-	
+
 	@Autowired
 	private IMcBasImoFailService mcBasImoFailService;
-	
-	
 
 	// //////////////////////////////////////////////////////////////////////////
 	//
@@ -86,8 +84,7 @@ public class McBasReportController {
 	 */
 	@Window
 	@Return(log = "显示消息中心_信息列表")
-	public String listWin(
-			@RequestParam(value = "sendTimeStart", required = false) java.lang.String sendTimeStart,// 发送开始时间
+	public String listWin(@RequestParam(value = "sendTimeStart", required = false) java.lang.String sendTimeStart,// 发送开始时间
 			@RequestParam(value = "sendTimeEnd", required = false) java.lang.String sendTimeEnd,// 发送开始时间
 			@RequestParam(value = "sortby", required = false) String sortBy,// 排序字段
 			@RequestParam(value = "sort", required = false) String sort,// 排序顺序
@@ -105,22 +102,21 @@ public class McBasReportController {
 		if (!StringUtils.isBlank(sendTimeEnd)) {
 			endDate = Converts.StrToDate(sendTimeEnd);
 		}
-		if (StringUtils.isBlank(sendTimeStart)
-				&& StringUtils.isBlank(sendTimeEnd)) {
+		if (StringUtils.isBlank(sendTimeStart) && StringUtils.isBlank(sendTimeEnd)) {
 			model.addAttribute("date", "所有历史发送");
 		} else {
 			model.addAttribute("date", sendTimeStart + " 至 " + sendTimeEnd);
 		}
 
-		//查询出成功信息的条数和失败的条数并添加到reuquest域中
-		model.addAttribute("basMcMessageSuccessSize",basMcMessageSuccessService.findByTime(startDate, endDate,sortBy == null ? "createTime" : sortBy, sort == null ? "desc" : sort).size());
+		// 查询出成功信息的条数和失败的条数并添加到reuquest域中
+		model.addAttribute("basMcMessageSuccessSize", basMcMessageSuccessService.findByTime(startDate, endDate, sortBy == null ? "createTime" : sortBy, sort == null ? "desc" : sort).size());
 		model.addAttribute("basMcMessageFailSize", basMcMessageFailService.findByTime(startDate, endDate, sortBy == null ? "createTime" : sortBy, sort == null ? "desc" : sort).size());
 		model.addAttribute("basMcEmailSuccessSize", basMcEmailSuccessService.findByTime(startDate, endDate, sortBy == null ? "createTime" : sortBy, sort == null ? "desc" : sort).size());
 		model.addAttribute("basMcEmailFailSize", basMcEmailFailService.findByTime(startDate, endDate, sortBy == null ? "createTime" : sortBy, sort == null ? "desc" : sort).size());
-		
-		model.addAttribute("basMcBasImoSuccessSize", mcBasImoSuccessService.findByTime(startDate, endDate, sortBy == null ? "createTime" : sortBy, sort == null ? "desc" : sort).size());//IMO发送成功条数
-		model.addAttribute("basMcBasImoFailSize", mcBasImoFailService.findByTime(startDate, endDate, sortBy == null ? "createTime" : sortBy, sort == null ? "desc" : sort).size());//IMO发送失败条数
-		
+
+		model.addAttribute("basMcBasImoSuccessSize", mcBasImoSuccessService.findByTime(startDate, endDate, sortBy == null ? "createTime" : sortBy, sort == null ? "desc" : sort).size());// IMO发送成功条数
+		model.addAttribute("basMcBasImoFailSize", mcBasImoFailService.findByTime(startDate, endDate, sortBy == null ? "createTime" : sortBy, sort == null ? "desc" : sort).size());// IMO发送失败条数
+
 		return "listMessageReport";
 	}
 

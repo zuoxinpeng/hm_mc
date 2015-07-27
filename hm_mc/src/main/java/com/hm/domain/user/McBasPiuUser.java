@@ -50,7 +50,7 @@ public class McBasPiuUser implements Serializable {
 	 * 获取 用户名称, 类型String 默认值:""
 	 */
 	private String name;
-	
+
 	/**
 	 * 获取 员工编号, 类型String 默认值:""
 	 */
@@ -60,22 +60,21 @@ public class McBasPiuUser implements Serializable {
 	 * 获取 登录密码, 类型String 默认值:""
 	 */
 	private String password;
-	
+
 	/**
 	 * 获取 手机号码, 类型String 默认值:""
 	 */
 	private String phone;
-	
+
 	/**
 	 * 获取 员工邮箱, 类型String 默认值:""
 	 */
 	private String email;
-	
+
 	/**
 	 * 获取 imo账号, 类型String 默认值:""
 	 */
 	private String imoId;
-	
 
 	/**
 	 * 获取 账号状态（1启用，2禁用）, 类型long 默认值:0
@@ -182,29 +181,27 @@ public class McBasPiuUser implements Serializable {
 	public void setName(String sUserName) {
 		this.name = sUserName;
 	}
-	
+
 	/**
-	* 获取 员工编号, 类型String 默认值:""
+	 * 获取 员工编号, 类型String 默认值:""
 	 *
 	 * @return 员工编号, 类型String 默认值:""
 	 */
 	@Column(name = "USER_NUMBER", length = 256)
-	public String getEmployeeNo()
-	{
-		return this.employeeNo; 
+	public String getEmployeeNo() {
+		return this.employeeNo;
 	}
-	
+
 	/**
 	 * 设置 员工编号, 类型String 默认值:""
 	 *
 	 * @param sEmployeeNo
 	 *            员工编号, 类型String 默认值:""
 	 */
-	public void setEmployeeNo(String sEmployeeNo)
-	{
-		this.employeeNo = sEmployeeNo; 
+	public void setEmployeeNo(String sEmployeeNo) {
+		this.employeeNo = sEmployeeNo;
 	}
-	
+
 	/**
 	 * 获取 登录密码, 类型String 默认值:""
 	 * 
@@ -231,22 +228,19 @@ public class McBasPiuUser implements Serializable {
 	 * @return 手机号码, 类型String 默认值:""
 	 */
 	@Column(name = "PHONE", length = 256)
-	public String getPhone()
-	{
-		return this.phone; 
+	public String getPhone() {
+		return this.phone;
 	}
-	
+
 	/**
 	 * 设置 手机号码, 类型String 默认值:""
 	 *
 	 * @param sPhone
 	 *            手机号码, 类型String 默认值:""
 	 */
-	public void setPhone(String sPhone)
-	{
-		this.phone = sPhone; 
+	public void setPhone(String sPhone) {
+		this.phone = sPhone;
 	}
-
 
 	/**
 	 * 获取 员工邮箱, 类型String 默认值:""
@@ -254,20 +248,18 @@ public class McBasPiuUser implements Serializable {
 	 * @return 员工邮箱, 类型String 默认值:""
 	 */
 	@Column(name = "EMAIL", length = 256)
-	public String getEmail()
-	{
-		return this.email; 
+	public String getEmail() {
+		return this.email;
 	}
-	
+
 	/**
 	 * 设置 员工邮箱, 类型String 默认值:""
 	 *
 	 * @param sEmail
 	 *            员工邮箱, 类型String 默认值:""
 	 */
-	public void setEmail(String sEmail)
-	{
-		this.email = sEmail; 
+	public void setEmail(String sEmail) {
+		this.email = sEmail;
 	}
 
 	/**
@@ -276,22 +268,20 @@ public class McBasPiuUser implements Serializable {
 	 * @return imo账号, 类型String 默认值:""
 	 */
 	@Column(name = "IMOID", length = 256)
-	public String getImoId()
-	{
-		return this.imoId; 
+	public String getImoId() {
+		return this.imoId;
 	}
-	
+
 	/**
 	 * 设置 imo账号, 类型String 默认值:""
 	 *
 	 * @param sImoId
 	 *            imo账号, 类型String 默认值:""
 	 */
-	public void setImoId(String sImoId)
-	{
-		this.imoId = sImoId; 
+	public void setImoId(String sImoId) {
+		this.imoId = sImoId;
 	}
-	
+
 	/**
 	 * 获取 账号状态（1启用，2禁用）, 类型long 默认值:0
 	 * 

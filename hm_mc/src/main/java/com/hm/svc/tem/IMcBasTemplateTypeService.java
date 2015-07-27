@@ -9,7 +9,6 @@ import com.hm.domain.tem.McBasTemplateType;
  * @author 左鑫鹏
  *
  */
-public interface IMcBasTemplateTypeService extends
-		HibernateService<McBasTemplateType> {
+public interface IMcBasTemplateTypeService extends HibernateService<McBasTemplateType> {
 
 }

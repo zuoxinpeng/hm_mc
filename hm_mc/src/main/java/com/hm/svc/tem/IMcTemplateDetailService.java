@@ -11,8 +11,7 @@ import com.hm.domain.tem.McTemplateDetail;
  * @author 王凯
  * 
  */
-public interface IMcTemplateDetailService extends
-		HibernateService<McTemplateDetail> {
+public interface IMcTemplateDetailService extends HibernateService<McTemplateDetail> {
 
 	/**
 	 * 根据 <br />
@@ -28,8 +27,7 @@ public interface IMcTemplateDetailService extends
 	 *            排序顺序
 	 * @return 数据列表的强类型实体类
 	 */
-	public abstract List<McTemplateDetail> findByTemplateCode(
-			String templateCode);
+	public abstract List<McTemplateDetail> findByTemplateCode(String templateCode);
 
 	/**
 	 * 根据 <br />
@@ -62,8 +60,7 @@ public interface IMcTemplateDetailService extends
 	 * @param TemplateTypeId
 	 * @return
 	 */
-	public abstract McTemplateDetail getByTemplateEncodeAndTypeId(
-			String templateEncode, java.lang.Long templateTypeId);
+	public abstract McTemplateDetail getByTemplateEncodeAndTypeId(String templateEncode, java.lang.Long templateTypeId);
 
 	/**
 	 * 根据 <br />

@@ -39,7 +39,7 @@ public interface IMcBasSystemDao extends HibernateDao<McBasSystem> {
 	 * 根据 <br />
 	 * SYST_CODE Code 系统代码<br />
 	 * 返回表MC_BAS_SYSTEM 消息中心_系统表的数据列表<br />
-	 * 开发者 王凯  2015年01月21日 13:00:07
+	 * 开发者 王凯 2015年01月21日 13:00:07
 	 * 
 	 * @param systCode
 	 *            系统代码

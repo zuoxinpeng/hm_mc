@@ -38,8 +38,7 @@ public interface IBasMcPiuUserDao extends HibernateDao<McBasPiuUser> {
 	 * @return BasMcPiuUser对象实体
 	 */
 	@Find(" from McBasPiuUser where 1=1  and lower(loginId) = :loginId  and lower(password) = :password  ")
-	public McBasPiuUser getByIdPassword(
-			@Param("loginId") java.lang.String loginId, // 登录账号
+	public McBasPiuUser getByIdPassword(@Param("loginId") java.lang.String loginId, // 登录账号
 			@Param("password") java.lang.String password // 登录密码
 	);
 
@@ -62,8 +61,7 @@ public interface IBasMcPiuUserDao extends HibernateDao<McBasPiuUser> {
 	 * @return 数据列表的强类型实体类
 	 */
 	@Find(" from McBasPiuUser where 1=1  #{and lower(loginId) like :loginId}  #{order by :order :dir}")
-	public PageList<McBasPiuUser> findByLoginId(
-			@Like("loginId") java.lang.String loginId, // 登录账号
+	public PageList<McBasPiuUser> findByLoginId(@Like("loginId") java.lang.String loginId, // 登录账号
 			@Replace("order") String order, // 排序字段
 			@Replace("dir") String orderDir, // 排序顺序
 			@PageNum int pageNum, // 当前分页的页数

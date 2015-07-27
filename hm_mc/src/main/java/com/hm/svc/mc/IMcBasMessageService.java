@@ -51,8 +51,7 @@ public interface IMcBasMessageService extends HibernateService<McBasMessage> {
 	 *            每页条数
 	 * @return 数据列表的强类型实体类
 	 */
-	public abstract PageList<McBasMessage> findByReceiver(
-			java.lang.String Receiver, // 短信接收号码多个电话可按照”,”分隔
+	public abstract PageList<McBasMessage> findByReceiver(java.lang.String Receiver, // 短信接收号码多个电话可按照”,”分隔
 			String order, // 排序字段
 			String orderDir, // 排序顺序
 			int pageNum, // 当前分页的页数

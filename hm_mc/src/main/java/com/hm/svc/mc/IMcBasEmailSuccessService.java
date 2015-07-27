@@ -12,8 +12,7 @@ import com.hm.domain.mc.McBasEmailSuccess;
  * @author ZUOXP
  * 
  */
-public interface IMcBasEmailSuccessService extends
-		HibernateService<McBasEmailSuccess> {
+public interface IMcBasEmailSuccessService extends HibernateService<McBasEmailSuccess> {
 
 	/**
 	 * 根据 <br />
@@ -29,8 +28,7 @@ public interface IMcBasEmailSuccessService extends
 	 *            排序顺序
 	 * @return 数据列表的强类型实体类
 	 */
-	public abstract List<McBasEmailSuccess> findByTime(
-			java.util.Date sendTimeStart, // 发送开始时间
+	public abstract List<McBasEmailSuccess> findByTime(java.util.Date sendTimeStart, // 发送开始时间
 			java.util.Date sendTimeEnd, // 发送开始时间
 			String order, // 排序字段
 			String orderDir// 排序顺序
@@ -54,8 +52,7 @@ public interface IMcBasEmailSuccessService extends
 	 *            每页条数
 	 * @return 数据列表的强类型实体类
 	 */
-	public abstract PageList<McBasEmailSuccess> findByReceiver(
-			java.lang.String receiver, // 邮件接收人
+	public abstract PageList<McBasEmailSuccess> findByReceiver(java.lang.String receiver, // 邮件接收人
 			String order, // 排序字段
 			String orderDir, // 排序顺序
 			int pageNum, // 当前分页的页数

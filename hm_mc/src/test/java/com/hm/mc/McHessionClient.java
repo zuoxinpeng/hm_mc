@@ -50,7 +50,7 @@ public class McHessionClient {
 		ArrayList<String> receiver = new ArrayList<String>();
 		receiver.add("18510512801");
 
-		basMcParameters.setTemplateCode("hm_user");
+		basMcParameters.setTemplateCode("hm_user3");
 		basMcParameters.setKey(commparam.getString("SMS_KEY"));
 		basMcParameters.setSystemId("IV");
 		basMcParameters.setSystemPw("07b62034beeabdb72");

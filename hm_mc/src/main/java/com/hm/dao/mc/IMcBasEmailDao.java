@@ -42,8 +42,7 @@ public interface IMcBasEmailDao extends HibernateDao<McBasEmail> {
 	 * @return 数据列表的强类型实体类
 	 */
 	@Find(" from McBasEmail where 1=1 and #{to_char(sendTime,'yyyy-mm-dd hh24-mi-ss') <= to_char(:SendTime,'yyyy-mm-dd hh24-mi-ss') or sendTime is null}")
-	public List<McBasEmail> findBySendTimeStatus(
-			@Param("SendTime") Date sendTime);
+	public List<McBasEmail> findBySendTimeStatus(@Param("SendTime") Date sendTime);
 
 	/**
 	 * 根据 <br />
@@ -64,8 +63,7 @@ public interface IMcBasEmailDao extends HibernateDao<McBasEmail> {
 	 * @return 数据列表的强类型实体类
 	 */
 	@Find(" from McBasEmail where 1=1  #{and lower(receiver) like :receiver}  #{order by :order :dir}")
-	public PageList<McBasEmail> findByReceiver(
-			@Like(value = "receiver", prefix = false, suffix = true) java.lang.String receiver,  //短邮件接收人可按照”,”分隔 
+	public PageList<McBasEmail> findByReceiver(@Like(value = "receiver", prefix = false, suffix = true) java.lang.String receiver, // 短邮件接收人可按照”,”分隔
 			@Replace("order") String order, // 排序字段
 			@Replace("dir") String orderDir, // 排序顺序
 			@PageNum int pageNum, // 当前分页的页数

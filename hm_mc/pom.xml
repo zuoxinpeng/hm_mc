@@ -101,9 +101,6 @@
 			<version>1.1.3</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> <version>${org.slf4j-version}</version> <scope>runtime</scope> </dependency> <dependency> <groupId>log4j</groupId> <artifactId>log4j</artifactId> <version>1.2.15</version> <exclusions> <exclusion> <groupId>javax.jms</groupId> 
-			<artifactId>jms</artifactId> </exclusion> <exclusion> <groupId>com.sun.jdmk</groupId> <artifactId>jmxtools</artifactId> </exclusion> <exclusion> <groupId>com.sun.jmx</groupId> <artifactId>jmxri</artifactId> </exclusion> </exclusions> <scope>runtime</scope> </dependency> -->
-
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
@@ -228,20 +225,6 @@
 			<version>1.7</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.codehaus.xfire</groupId>
-			<artifactId>xfire-core</artifactId>
-			<version>1.2.6</version>
-		</dependency>
-
-		<!-- <dependency> <groupId>org.codehaus.xfire</groupId> <artifactId>xfire-spring</artifactId> <version>1.2.6</version> </dependency> -->
-
-		<dependency>
-			<groupId>org.codehaus.xfire</groupId>
-			<artifactId>xfire-aegis</artifactId>
-			<version>1.2.6</version>
-		</dependency>
-
 		<!-- hession -->
 		<dependency>
 			<groupId>com.caucho</groupId>
@@ -260,45 +243,27 @@
 			<artifactId>quartz-jobs</artifactId>
 			<version>2.2.1</version>
 		</dependency>
-		<!-- xfire发布webservice -->
+
 		<dependency>
 			<groupId>org.codehaus.xfire</groupId>
-			<artifactId>xfire-all</artifactId>
+			<artifactId>xfire-core</artifactId>
 			<version>1.2.6</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
+		</dependency>
+		
+		
+
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-lgpl</artifactId>
+			<version>1.9.1</version>
 		</dependency>
 		<dependency>
-			<groupId>xmlbeans</groupId>
-			<artifactId>xbean</artifactId>
-			<version>2.2.0</version>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-lgpl</artifactId>
+			<version>1.9.1</version>
 		</dependency>
-		<dependency>
-			<groupId>xml-security</groupId>
-			<artifactId>xmlsec</artifactId>
-			<version>1.3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>net.gplatform</groupId>
-			<artifactId>Sdk4J</artifactId>
-			<version>2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.xbean</groupId>
-			<artifactId>xbean-spring</artifactId>
-			<version>2.8</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!-- xfire end -->
+
 	</dependencies>
 	<repositories>
 		<repository>

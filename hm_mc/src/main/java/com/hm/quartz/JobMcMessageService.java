@@ -17,12 +17,11 @@ import com.hm.domain.mc.McBasLog;
 import com.hm.domain.mc.McBasMessage;
 import com.hm.domain.mc.McBasMessageFail;
 import com.hm.domain.mc.McBasMessageSuccess;
+import com.hm.svc.impl.webservice.ZtSmsService;
 import com.hm.svc.log.IMcBasLogService;
 import com.hm.svc.mc.IMcBasMessageFailService;
 import com.hm.svc.mc.IMcBasMessageService;
 import com.hm.svc.mc.IMcBasMessageSuccessService;
-import com.hm.svcImpl.webservice.SMSXfireClient;
-import com.hm.svcImpl.webservice.ZtSmsService;
 import com.hm.util.Converts;
 import com.hm.util.MyDate;
 
@@ -44,8 +43,6 @@ public class JobMcMessageService {
 	IMcBasMessageFailService basMcMessageFailService;
 	@Autowired
 	IMcBasMessageSuccessService basMcMessageSuccessService;
-	@Autowired
-	SMSXfireClient smsXfireClient;
 	@Autowired
 	IMcBasLogService mcBasLogService;
 	@Autowired
@@ -77,10 +74,8 @@ public class JobMcMessageService {
 					 * 2.推送失败，删除短信表中当条数据，并且将此条数据保存入短信失败表。
 					 */
 
-//					JSONObject obj = smsXfireClient.sendMcToSMS(bMessage.getReceiver(), bMessage.getContent(), Converts.DateToString(bMessage.getSendTime()), bMessage.getGrpId(), bMessage.getMId(), bMessage.getSId());
-					
 					JSONObject obj = ztSmsService.sendSms(bMessage.getReceiver(), bMessage.getContent(), null, null);
-					
+
 					// 记录日志
 					McBasLog log = new McBasLog(obj.toString());// 插入日志信息
 					mcBasLogService.insertBasMcLog(log);

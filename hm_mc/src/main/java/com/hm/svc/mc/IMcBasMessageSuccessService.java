@@ -13,11 +13,9 @@ import com.hm.domain.mc.McBasMessageSuccess;
  * @author ZUOXP
  * 
  */
-public interface IMcBasMessageSuccessService extends
-		HibernateService<McBasMessageSuccess> {
+public interface IMcBasMessageSuccessService extends HibernateService<McBasMessageSuccess> {
 
-	public void saveBasMcMessageSuccess(
-			McBasMessageSuccess basMcMessageSuccess, McBasMessage basMcMessage);
+	public void saveBasMcMessageSuccess(McBasMessageSuccess basMcMessageSuccess, McBasMessage basMcMessage);
 
 	/**
 	 * 根据 <br />
@@ -35,8 +33,8 @@ public interface IMcBasMessageSuccessService extends
 	 *            排序顺序
 	 * @return 数据列表的强类型实体类
 	 */
-	public abstract List<McBasMessageSuccess> findByTime(
-			java.util.Date sendTimeStart, // 发送开始时间 (查询的使用的开始时间)
+	public abstract List<McBasMessageSuccess> findByTime(java.util.Date sendTimeStart, // 发送开始时间
+																						// (查询的使用的开始时间)
 			java.util.Date sendTimeEnd, // 发送开始时间(查询使用的结束时间)
 			String order, // 排序字段
 			String orderDir// 排序顺序
@@ -60,8 +58,7 @@ public interface IMcBasMessageSuccessService extends
 	 *            每页条数
 	 * @return 数据列表的强类型实体类
 	 */
-	public abstract PageList<McBasMessageSuccess> findByReceiver(
-			java.lang.String receiver, // 短信接收人
+	public abstract PageList<McBasMessageSuccess> findByReceiver(java.lang.String receiver, // 短信接收人
 			String order, // 排序字段
 			String orderDir, // 排序顺序
 			int pageNum, // 当前分页的页数

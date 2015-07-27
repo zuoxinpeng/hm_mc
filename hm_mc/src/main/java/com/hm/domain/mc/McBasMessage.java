@@ -33,13 +33,11 @@ public class McBasMessage implements Serializable {
 	 * （类）的serialVersionUID进行比较，如果相同就认为是一致的，可以进行反序列化，否则就会出现序列化版本不一致的异常
 	 */
 	private static final long serialVersionUID = 2014112615121461383L;
-	
+
 	public McBasMessage() {
 	}
 
-	public McBasMessage(String receiver, String content, String key,
-			long status, String grpId, String mId, String sId, String taskType,
-			Date sendTime, Date createTime, Date updateTime) {
+	public McBasMessage(String receiver, String content, String key, long status, String grpId, String mId, String sId, String taskType, Date sendTime, Date createTime, Date updateTime) {
 		this.receiver = receiver;
 		this.content = content;
 		this.key = key;

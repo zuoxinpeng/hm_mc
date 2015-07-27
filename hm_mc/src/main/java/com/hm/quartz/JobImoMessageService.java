@@ -29,7 +29,7 @@ import com.hm.util.MyDate;
 @Service
 @Transactional
 public class JobImoMessageService {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(JobImoMessageService.class);
 
 	@Autowired
@@ -47,8 +47,9 @@ public class JobImoMessageService {
 	 * 开发者 王凯 2015年1月06日 15:05:07
 	 */
 	public void sendMcImoJob() {
-		
-		List<McBasImo> imoList = mcBasImoService.findBySendTimeStatus(new Date());// 查询IMO 表数据
+
+		List<McBasImo> imoList = mcBasImoService.findBySendTimeStatus(new Date());// 查询IMO
+																					// 表数据
 
 		if (imoList != null && imoList.size() > 0) {
 			logger.info("Send IMO task execution start time:" + new MyDate() + " Information number：" + imoList.size());
@@ -57,33 +58,25 @@ public class JobImoMessageService {
 				Iterator<McBasImo> iter = imoList.iterator();
 				McBasImo bImo = new McBasImo();
 				while (iter.hasNext()) {
-					bImo = iter.next(); 
+					bImo = iter.next();
 
-					// 调用消息推送方法  接收人为uid
+					// 调用消息推送方法 接收人为uid
 					String returnFlag = mcBasImoService.sendMsg(bImo.getReceiverUid(), bImo.getSubject(), bImo.getContent());
 					logger.info("JobImoMessageService sendMcImoJob returnFlag:" + returnFlag);
-					
+
 					JSONObject json = JSONObject.fromObject(returnFlag);
 					logger.info("JobImoMessageService sendMcImoJob returnFlagJson:" + json.toString());
-					
+
 					// 根据返回值做处理success为发送成功 fail为发送失败
 					if ("success".equals(json.get("result"))) {
 
-						McBasImoSuccess bSuccess = new McBasImoSuccess(
-								bImo.getReceiver(),bImo.getReceiverUid(), bImo.getSubject(),
-								bImo.getContent(), bImo.getKey(), 2L,
-								bImo.getGrpId(), bImo.getSendTime(),
-								bImo.getCreateTime(), null);
+						McBasImoSuccess bSuccess = new McBasImoSuccess(bImo.getReceiver(), bImo.getReceiverUid(), bImo.getSubject(), bImo.getContent(), bImo.getKey(), 2L, bImo.getGrpId(), bImo.getSendTime(), bImo.getCreateTime(), null);
 
 						mcBasImoSuccessService.create(bSuccess);
 						mcBasImoService.delete(bImo);
 					} else {
-						
-						McBasImoFail bFail = new McBasImoFail(
-								bImo.getReceiver(),bImo.getReceiverUid(), bImo.getSubject(),
-								bImo.getContent(), bImo.getKey(), 3L,
-								bImo.getGrpId(), "", bImo.getSendTime(),
-								new Date(), null);
+
+						McBasImoFail bFail = new McBasImoFail(bImo.getReceiver(), bImo.getReceiverUid(), bImo.getSubject(), bImo.getContent(), bImo.getKey(), 3L, bImo.getGrpId(), "", bImo.getSendTime(), new Date(), null);
 						mcBasImoFailService.create(bFail);
 						mcBasImoService.delete(bImo);
 					}
@@ -91,6 +84,6 @@ public class JobImoMessageService {
 			} catch (Exception e) {
 				logger.error("JobImoMessageService sendMcImoJob:" + e.getMessage(), e);
 			}
-		} 
+		}
 	}
 }

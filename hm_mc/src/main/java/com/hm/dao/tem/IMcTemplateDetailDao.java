@@ -34,8 +34,7 @@ public interface IMcTemplateDetailDao extends HibernateDao<McTemplateDetail> {
 	 * @return 数据列表的强类型实体类
 	 */
 	@Find(" from McTemplateDetail where 1=1 and templateId = :templateId")
-	public List<McTemplateDetail> findByTemplateId(
-			@Param("templateId") java.lang.Long templateId);
+	public List<McTemplateDetail> findByTemplateId(@Param("templateId") java.lang.Long templateId);
 
 	/**
 	 * 根据 <br />
@@ -51,8 +50,7 @@ public interface IMcTemplateDetailDao extends HibernateDao<McTemplateDetail> {
 	 * @return McTemplateDetail对象实体
 	 */
 	@Find(" from McTemplateDetail where 1=1  and templateId = :templateId  and templateTypeId = :templateTypeId")
-	public McTemplateDetail getByTemplateIdTypeId(
-			@Param("templateId") java.lang.Long templateId, // 模板ID
+	public McTemplateDetail getByTemplateIdTypeId(@Param("templateId") java.lang.Long templateId, // 模板ID
 			@Param("templateTypeId") java.lang.Long templateTypeId // 消息类型ID
 	);
 
@@ -70,8 +68,7 @@ public interface IMcTemplateDetailDao extends HibernateDao<McTemplateDetail> {
 	 * @return McTemplateDetail对象实体
 	 */
 	@Find(" from McTemplateDetail where 1=1  and templateId = (select m.templateId from McTemplate m where m.templateEncode = :templateEncode) and templateTypeId = :templateTypeId  ")
-	public McTemplateDetail getByTemplateEncodeAndTypeId(
-			@Param("templateEncode") String templateEncode, // 模板code
+	public McTemplateDetail getByTemplateEncodeAndTypeId(@Param("templateEncode") String templateEncode, // 模板code
 			@Param("templateTypeId") java.lang.Long templateTypeId // 消息类型ID
 	);
 
