@@ -23,7 +23,9 @@ import com.hm.svc.mc.IMcBasMessageService;
  */
 @Service
 @Transactional
-public class McBasMessageFailService extends HibernateServiceBase<McBasMessageFail> implements IMcBasMessageFailService {
+public class McBasMessageFailService extends
+		HibernateServiceBase<McBasMessageFail> implements
+		IMcBasMessageFailService {
 	@Autowired
 	private IMcBasMessageFailDao theDao;
 	@Autowired
@@ -34,7 +36,8 @@ public class McBasMessageFailService extends HibernateServiceBase<McBasMessageFa
 	}
 
 	@Override
-	public void saveBasMcMessageFail(McBasMessageFail basMcMessageFail, McBasMessage basMcMessage) {
+	public void saveBasMcMessageFail(McBasMessageFail basMcMessageFail,
+			McBasMessage basMcMessage) {
 		theDao.save(basMcMessageFail);
 		basMcMessageService.delete(basMcMessage);
 	}
@@ -89,7 +92,8 @@ public class McBasMessageFailService extends HibernateServiceBase<McBasMessageFa
 	) {
 		if (receiver != null)
 			receiver = receiver.toLowerCase().trim();
-		return theDao.findByReceiver(receiver, order, orderDir, pageNum, pageSize);
+		return theDao.findByReceiver(receiver, order, orderDir, pageNum,
+				pageSize);
 	}
 
 }

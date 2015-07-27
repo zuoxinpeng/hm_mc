@@ -22,7 +22,8 @@ import com.hm.svc.mc.IMcBasMessageService;
  */
 @Service
 @Transactional
-public class McBasMessageService extends HibernateServiceBase<McBasMessage> implements IMcBasMessageService {
+public class McBasMessageService extends HibernateServiceBase<McBasMessage>
+		implements IMcBasMessageService {
 	@Autowired
 	private IMcBasMessageDao theDao;
 
@@ -77,7 +78,8 @@ public class McBasMessageService extends HibernateServiceBase<McBasMessage> impl
 	) {
 		if (Receiver != null)
 			Receiver = Receiver.toLowerCase().trim();
-		return theDao.findByReceiver(Receiver, order, orderDir, pageNum, pageSize);
+		return theDao.findByReceiver(Receiver, order, orderDir, pageNum,
+				pageSize);
 	}
 
 }

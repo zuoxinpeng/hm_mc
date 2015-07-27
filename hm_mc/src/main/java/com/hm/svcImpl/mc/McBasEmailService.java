@@ -22,7 +22,8 @@ import com.hm.svc.mc.IMcBasEmailService;
  */
 @Service
 @Transactional
-public class McBasEmailService extends HibernateServiceBase<McBasEmail> implements IMcBasEmailService {
+public class McBasEmailService extends HibernateServiceBase<McBasEmail>
+		implements IMcBasEmailService {
 	@Autowired
 	private IMcBasEmailDao theDao;
 
@@ -77,7 +78,8 @@ public class McBasEmailService extends HibernateServiceBase<McBasEmail> implemen
 	) {
 		if (receiver != null)
 			receiver = receiver.toLowerCase().trim();
-		return theDao.findByReceiver(receiver, order, orderDir, pageNum, pageSize);
+		return theDao.findByReceiver(receiver, order, orderDir, pageNum,
+				pageSize);
 	}
 
 }

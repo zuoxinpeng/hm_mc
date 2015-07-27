@@ -66,13 +66,17 @@ public class JsonUtils {
 		} finally {
 
 			try {
-				jsonGen.close();
+				if (jsonGen != null) {
+					jsonGen.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-
-		return strWrite.toString();
+		if (strWrite != null) {
+			return strWrite.toString();
+		}
+		return null;
 	}
 
 	/**
@@ -94,12 +98,17 @@ public class JsonUtils {
 		} finally {
 
 			try {
-				jsonGen.close();
+				if (jsonGen != null) {
+					jsonGen.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		return strWrite.toString();
+		if (strWrite != null) {
+			return strWrite.toString();
+		}
+		return null;
 	}
 
 	/**

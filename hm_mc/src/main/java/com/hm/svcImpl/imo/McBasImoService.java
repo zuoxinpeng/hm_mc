@@ -28,20 +28,19 @@ import com.hm.util.CommonParam;
 
 @Service
 @Transactional
-public class McBasImoService extends HibernateServiceBase<McBasImo> implements
-		IMcBasImoService {
-	
+public class McBasImoService extends HibernateServiceBase<McBasImo> implements IMcBasImoService {
+
 	private static final Logger logger = LoggerFactory.getLogger(McBasImoService.class);
-	
+
 	@Autowired
 	private IMcBasImoDao theDao;
 
 	public HibernateDao<McBasImo> getDao() {
 		return theDao;
 	}
-	
+
 	CommonParam param = new CommonParam();
-	
+
 	/**
 	 * 获取组织架构信息
 	 * 
@@ -50,8 +49,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 	 * @return result 接口返回结果
 	 */
 	public String getCorpInfo(String did) {
-		StringBuffer url = new StringBuffer("http://" + param.getString("IMO_SERVER_HOST")
-				+ "OpenPlatform/sync/getsync.php");
+		StringBuffer url = new StringBuffer("http://" + param.getString("IMO_SERVER_HOST") + "OpenPlatform/sync/getsync.php");
 		url.append("?cid=");
 		url.append(param.getString("IMO_CID"));
 		url.append("&appKey=");
@@ -73,8 +71,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 	 * @return result 接口返回结果
 	 */
 	public String getDeptInfo(String dids) {
-		StringBuffer url = new StringBuffer("http://" + param.getString("IMO_SERVER_HOST")
-				+ "/OpenPlatform/sync/getsync.php");
+		StringBuffer url = new StringBuffer("http://" + param.getString("IMO_SERVER_HOST") + "/OpenPlatform/sync/getsync.php");
 		url.append("?cid=");
 		url.append(param.getString("IMO_CID"));
 		url.append("&appKey=");
@@ -97,8 +94,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 	 */
 	@SuppressWarnings("unchecked")
 	public String getDetailDeptInfo(String did) {
-		StringBuffer url = new StringBuffer("http://" + param.getString("IMO_SERVER_HOST")
-				+ "/OpenPlatform/sync/getsync.php");
+		StringBuffer url = new StringBuffer("http://" + param.getString("IMO_SERVER_HOST") + "/OpenPlatform/sync/getsync.php");
 		url.append("?cid=");
 		url.append(param.getString("IMO_CID"));
 		url.append("&appKey=");
@@ -118,8 +114,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 		for (String s : list) {
 			list2.add(s);
 		}
-		System.out.println(list2.toString().substring(1,
-				list2.toString().length() - 1));
+		System.out.println(list2.toString().substring(1, list2.toString().length() - 1));
 
 		return result;
 	}
@@ -132,8 +127,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 	 * @return result 接口返回结果
 	 */
 	public String getUserInfoByIds(String uids) {
-		StringBuffer url = new StringBuffer("http://" + param.getString("IMO_SERVER_HOST")
-				+ "/OpenPlatform/sync/getsync.php");
+		StringBuffer url = new StringBuffer("http://" + param.getString("IMO_SERVER_HOST") + "/OpenPlatform/sync/getsync.php");
 		url.append("?cid=");
 		url.append(param.getString("IMO_CID"));
 		url.append("&appKey=");
@@ -155,8 +149,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 	 * @return result 接口返回结果
 	 */
 	public String getUserInfoByAccounts(String uas) {
-		StringBuffer url = new StringBuffer("http://" + param.getString("IMO_SERVER_HOST")
-				+ "/OpenPlatform/sync/getsync.php");
+		StringBuffer url = new StringBuffer("http://" + param.getString("IMO_SERVER_HOST") + "/OpenPlatform/sync/getsync.php");
 		url.append("?cid=");
 		url.append(param.getString("IMO_CID"));
 		url.append("&appKey=");
@@ -176,8 +169,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 	 * @return result 接口返回结果
 	 */
 	public String getUserCount() {
-		StringBuffer url = new StringBuffer("http://" + param.getString("IMO_SERVER_HOST")
-				+ "/OpenPlatform/sync/getsync.php");
+		StringBuffer url = new StringBuffer("http://" + param.getString("IMO_SERVER_HOST") + "/OpenPlatform/sync/getsync.php");
 		url.append("?cid=");
 		url.append(param.getString("IMO_CID"));
 		url.append("&appKey=");
@@ -200,10 +192,9 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 		String url = "http://" + param.getString("IMO_SERVER_HOST") + "/OpenPlatform/sync/sync.php";
 		StringBuffer result = new StringBuffer();
 		try {
-//			byte[] base64User = Base64.encode(user.toString().getBytes());
+			// byte[] base64User = Base64.encode(user.toString().getBytes());
 			URL sendUrl = new URL(url);
-			HttpURLConnection connection = (HttpURLConnection) sendUrl
-					.openConnection();
+			HttpURLConnection connection = (HttpURLConnection) sendUrl.openConnection();
 
 			connection.setDoOutput(true);
 
@@ -223,13 +214,12 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 			params.append("&appcid=");
 			params.append(param.getString("IMO_CID"));
 			params.append("&user=");
-//			params.append(base64User);
+			// params.append(base64User);
 			params.append("&evno=5");
 			objOutStrm.write(params.toString().getBytes());
 			objOutStrm.flush();
 			objOutStrm.close();
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			connection.connect();
 			String temp = "";
 			while ((temp = in.readLine()) != null) {
@@ -256,10 +246,9 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 		String url = "http://" + param.getString("IMO_SERVER_HOST") + "/OpenPlatform/sync/sync.php";
 		StringBuffer result = new StringBuffer();
 		try {
-//			byte[] base64User = Base64.encode(user.toString().getBytes());
+			// byte[] base64User = Base64.encode(user.toString().getBytes());
 			URL sendUrl = new URL(url);
-			HttpURLConnection connection = (HttpURLConnection) sendUrl
-					.openConnection();
+			HttpURLConnection connection = (HttpURLConnection) sendUrl.openConnection();
 
 			connection.setDoOutput(true);
 
@@ -281,13 +270,12 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 			params.append("&uaccount=");
 			params.append(account);
 			params.append("&user=");
-//			params.append(base64User);
+			// params.append(base64User);
 			params.append("&evno=6");
 			objOutStrm.write(params.toString().getBytes());
 			objOutStrm.flush();
 			objOutStrm.close();
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			connection.connect();
 			String temp = "";
 			while ((temp = in.readLine()) != null) {
@@ -315,8 +303,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 		StringBuffer result = new StringBuffer();
 		try {
 			URL sendUrl = new URL(url);
-			HttpURLConnection connection = (HttpURLConnection) sendUrl
-					.openConnection();
+			HttpURLConnection connection = (HttpURLConnection) sendUrl.openConnection();
 
 			connection.setDoOutput(true);
 
@@ -343,8 +330,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 			objOutStrm.write(params.toString().getBytes());
 			objOutStrm.flush();
 			objOutStrm.close();
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			connection.connect();
 			String temp = "";
 			while ((temp = in.readLine()) != null) {
@@ -374,8 +360,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 		StringBuffer result = new StringBuffer();
 		try {
 			URL sendUrl = new URL(url);
-			HttpURLConnection connection = (HttpURLConnection) sendUrl
-					.openConnection();
+			HttpURLConnection connection = (HttpURLConnection) sendUrl.openConnection();
 
 			connection.setDoOutput(true);
 
@@ -404,8 +389,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 			objOutStrm.write(params.toString().getBytes());
 			objOutStrm.flush();
 			objOutStrm.close();
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			connection.connect();
 			String temp = "";
 			while ((temp = in.readLine()) != null) {
@@ -430,10 +414,9 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 		String url = "http://" + param.getString("IMO_SERVER_HOST") + "/OpenPlatform/sync/sync.php";
 		StringBuffer result = new StringBuffer();
 		try {
-//			byte[] base64Dept = Base64.encode(dept.toString().getBytes());
+			// byte[] base64Dept = Base64.encode(dept.toString().getBytes());
 			URL sendUrl = new URL(url);
-			HttpURLConnection connection = (HttpURLConnection) sendUrl
-					.openConnection();
+			HttpURLConnection connection = (HttpURLConnection) sendUrl.openConnection();
 
 			connection.setDoOutput(true);
 
@@ -453,13 +436,12 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 			params.append("&appcid=");
 			params.append(param.getString("IMO_CID"));
 			params.append("&dept=");
-//			params.append(base64Dept);
+			// params.append(base64Dept);
 			params.append("&evno=8");
 			objOutStrm.write(params.toString().getBytes());
 			objOutStrm.flush();
 			objOutStrm.close();
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			connection.connect();
 			String temp = "";
 			while ((temp = in.readLine()) != null) {
@@ -486,10 +468,9 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 		String url = "http://" + param.getString("IMO_SERVER_HOST") + "/OpenPlatform/sync/sync.php";
 		StringBuffer result = new StringBuffer();
 		try {
-//			byte[] base64Dept = Base64.encode(dept.toString().getBytes());
+			// byte[] base64Dept = Base64.encode(dept.toString().getBytes());
 			URL sendUrl = new URL(url);
-			HttpURLConnection connection = (HttpURLConnection) sendUrl
-					.openConnection();
+			HttpURLConnection connection = (HttpURLConnection) sendUrl.openConnection();
 
 			connection.setDoOutput(true);
 
@@ -511,13 +492,12 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 			params.append("&did=");
 			params.append(did);
 			params.append("&dept=");
-//			params.append(base64Dept);
+			// params.append(base64Dept);
 			params.append("&evno=9");
 			objOutStrm.write(params.toString().getBytes());
 			objOutStrm.flush();
 			objOutStrm.close();
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			connection.connect();
 			String temp = "";
 			while ((temp = in.readLine()) != null) {
@@ -543,8 +523,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 		StringBuffer result = new StringBuffer();
 		try {
 			URL sendUrl = new URL(url);
-			HttpURLConnection connection = (HttpURLConnection) sendUrl
-					.openConnection();
+			HttpURLConnection connection = (HttpURLConnection) sendUrl.openConnection();
 
 			connection.setDoOutput(true);
 
@@ -569,8 +548,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 			objOutStrm.write(params.toString().getBytes());
 			objOutStrm.flush();
 			objOutStrm.close();
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			connection.connect();
 			String temp = "";
 			while ((temp = in.readLine()) != null) {
@@ -600,8 +578,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 		StringBuffer result = new StringBuffer();
 		try {
 			URL sendUrl = new URL(url);
-			HttpURLConnection connection = (HttpURLConnection) sendUrl
-					.openConnection();
+			HttpURLConnection connection = (HttpURLConnection) sendUrl.openConnection();
 
 			connection.setDoOutput(true);
 
@@ -630,8 +607,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 			objOutStrm.write(params.toString().getBytes());
 			objOutStrm.flush();
 			objOutStrm.close();
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			connection.connect();
 			String temp = "";
 			while ((temp = in.readLine()) != null) {
@@ -656,10 +632,9 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 		String url = "http://" + param.getString("IMO_SERVER_HOST") + "/OpenPlatform/sync/sync.php";
 		StringBuffer result = new StringBuffer();
 		try {
-//			byte[] base64cInfo = Base64.encode(cInfo.toString().getBytes());
+			// byte[] base64cInfo = Base64.encode(cInfo.toString().getBytes());
 			URL sendUrl = new URL(url);
-			HttpURLConnection connection = (HttpURLConnection) sendUrl
-					.openConnection();
+			HttpURLConnection connection = (HttpURLConnection) sendUrl.openConnection();
 
 			connection.setDoOutput(true);
 
@@ -679,13 +654,12 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 			params.append("&appcid=");
 			params.append(param.getString("IMO_CID"));
 			params.append("&cinfo=");
-//			params.append(base64cInfo);
+			// params.append(base64cInfo);
 			params.append("&evno=11");
 			objOutStrm.write(params.toString().getBytes());
 			objOutStrm.flush();
 			objOutStrm.close();
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			connection.connect();
 			String temp = "";
 			while ((temp = in.readLine()) != null) {
@@ -758,7 +732,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 			params.append("poptype");
 			params.append("1");
 			URL sendUrl = new URL(url);
-			
+
 			HttpURLConnection connection = (HttpURLConnection) sendUrl.openConnection();
 
 			connection.setDoOutput(true);
@@ -775,8 +749,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 			objOutStrm.flush();
 
 			objOutStrm.close();
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			connection.connect();
 			String temp = "";
 			while ((temp = in.readLine()) != null) {
@@ -802,10 +775,8 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 		StringBuffer response = new StringBuffer();
 		try {
 			URL url = new URL(reqUrl);
-			HttpURLConnection connection = (HttpURLConnection) url
-					.openConnection();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			String temp = "";
 			while ((temp = reader.readLine()) != null) {
 				response.append(temp);
@@ -816,13 +787,12 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 
 		return response.toString();
 	}
-	
-	
-	//----------------------------------------------------------
-	
+
+	// ----------------------------------------------------------
+
 	/**
-	 * 根据 <br />用于表的定时扫描查询
-	 * SEND_TIME SendTime 需要延迟发送的时间，不传为立即发送邮件<br />
+	 * 根据 <br />
+	 * 用于表的定时扫描查询 SEND_TIME SendTime 需要延迟发送的时间，不传为立即发送邮件<br />
 	 * STATUS Status 发送状态（1：待发送；2：已发送）<br />
 	 * 返回表T_BAS_MC_EMAIL 邮件表的数据列表<br />
 	 * 开发者 王凯 2015年1月06日 14:58:04
@@ -840,8 +810,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 	public List<McBasImo> findBySendTimeStatus(Date sendTime) {
 		return theDao.findBySendTimeStatus(sendTime);
 	}
-	
-	
+
 	/**
 	 * 根据 <br />
 	 * RECEIVER Receiver IMO接收人（邮箱的前缀拼音组成）<br />
@@ -868,8 +837,7 @@ public class McBasImoService extends HibernateServiceBase<McBasImo> implements
 	) {
 		if (Receiver != null)
 			Receiver = Receiver.toLowerCase().trim();
-		return theDao.findByReceiver(Receiver, order, orderDir, pageNum,
-				pageSize);
+		return theDao.findByReceiver(Receiver, order, orderDir, pageNum, pageSize);
 	}
 
 }

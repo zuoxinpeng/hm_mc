@@ -2,28 +2,28 @@ package com.hm.svcImpl.mc;
 
 public class McBasMsgParameters {
 
-	// 消息发送人
+	//消息发送人
 	private String sender = "";
 
-	// 会员ID
+	//会员ID
 	private Long accountId = null;
 
-	// 是否动态消息标题 0：否；1：是
+	//是否动态消息标题 0：否；1：是
 	private String isDynamicSubject = "0";
 
-	// 接收人对象：1、外部用户;2、内部用户;3、合作伙伴
+	//接收人对象：1、外部用户;2、内部用户;3、合作伙伴
 	private String receiverType = "";
 
-	// 获取 类型：1-业务提醒、2-系统公告、3-其它信息, 类型long 默认值:(long)1
+	//获取 类型：1-业务提醒、2-系统公告、3-其它信息, 类型long 默认值:(long)1
 	private long mgType = 1L;
 
-	// 优先级重要性：1、重要;2、普通
+	//优先级重要性：1、重要;2、普通
 	private String priority = "2";
 
-	// 系统ID
+	//系统ID
 	private String systemId = "11";
 
-	// 消息发送是否循环（1：循环；2：不循环只执行一遍）
+	//消息发送是否循环（1：循环；2：不循环只执行一遍）
 	private String isCircle = "2";
 
 	//
@@ -59,16 +59,16 @@ public class McBasMsgParameters {
 	//
 	private String saveOffline = "true";
 
-	// 消息发送开始时间
+	//消息发送开始时间
 	private String sendStartTime = "";
 
-	// 消息发送结束时间
+	//消息发送结束时间
 	private String sendEndTime = "";
 
-	// 发送时间
+	//发送时间
 	private String sendTime = "";
 
-	// 结束时间
+	//结束时间
 	private String endTime = "";
 
 	public String getSystemId() {
@@ -95,13 +95,13 @@ public class McBasMsgParameters {
 		this.sender = sender;
 	}
 
-	// public String getSubject() {
-	// return subject;
-	// }
-	//
-	// public void setSubject(String subject) {
-	// this.subject = subject;
-	// }
+//	public String getSubject() {
+//		return subject;
+//	}
+//
+//	public void setSubject(String subject) {
+//		this.subject = subject;
+//	}
 
 	public String getReceiverType() {
 		return receiverType;
@@ -262,5 +262,6 @@ public class McBasMsgParameters {
 	public void setIsDynamicSubject(String isDynamicSubject) {
 		this.isDynamicSubject = isDynamicSubject;
 	}
+
 
 }

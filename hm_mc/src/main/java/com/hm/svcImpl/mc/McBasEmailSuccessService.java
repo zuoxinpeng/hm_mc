@@ -21,7 +21,9 @@ import com.hm.svc.mc.IMcBasEmailSuccessService;
  */
 @Service
 @Transactional
-public class McBasEmailSuccessService extends HibernateServiceBase<McBasEmailSuccess> implements IMcBasEmailSuccessService {
+public class McBasEmailSuccessService extends
+		HibernateServiceBase<McBasEmailSuccess> implements
+		IMcBasEmailSuccessService {
 	@Autowired
 	private IMcBasEmailSuccessDao theDao;
 
@@ -69,7 +71,8 @@ public class McBasEmailSuccessService extends HibernateServiceBase<McBasEmailSuc
 	 *            每页条数
 	 * @return 数据列表的强类型实体类
 	 */
-	public PageList<McBasEmailSuccess> findByReceiver(java.lang.String receiver, // 邮件接收人
+	public PageList<McBasEmailSuccess> findByReceiver(
+			java.lang.String receiver, // 邮件接收人
 			String order, // 排序字段
 			String orderDir, // 排序顺序
 			int pageNum, // 当前分页的页数
@@ -77,7 +80,8 @@ public class McBasEmailSuccessService extends HibernateServiceBase<McBasEmailSuc
 	) {
 		if (receiver != null)
 			receiver = receiver.toLowerCase().trim();
-		return theDao.findByReceiver(receiver, order, orderDir, pageNum, pageSize);
+		return theDao.findByReceiver(receiver, order, orderDir, pageNum,
+				pageSize);
 	}
 
 }

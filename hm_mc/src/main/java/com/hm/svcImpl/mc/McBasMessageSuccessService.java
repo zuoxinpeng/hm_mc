@@ -23,7 +23,9 @@ import com.hm.svc.mc.IMcBasMessageSuccessService;
  */
 @Service
 @Transactional
-public class McBasMessageSuccessService extends HibernateServiceBase<McBasMessageSuccess> implements IMcBasMessageSuccessService {
+public class McBasMessageSuccessService extends
+		HibernateServiceBase<McBasMessageSuccess> implements
+		IMcBasMessageSuccessService {
 	@Autowired
 	private IMcBasMessageSuccessDao theDao;
 	@Autowired
@@ -34,7 +36,8 @@ public class McBasMessageSuccessService extends HibernateServiceBase<McBasMessag
 	}
 
 	@Override
-	public void saveBasMcMessageSuccess(McBasMessageSuccess basMcMessageSuccess, McBasMessage basMcMessage) {
+	public void saveBasMcMessageSuccess(
+			McBasMessageSuccess basMcMessageSuccess, McBasMessage basMcMessage) {
 		theDao.save(basMcMessageSuccess);
 		basMcMessageService.delete(basMcMessage);
 	}
@@ -82,7 +85,8 @@ public class McBasMessageSuccessService extends HibernateServiceBase<McBasMessag
 	 *            每页条数
 	 * @return 数据列表的强类型实体类
 	 */
-	public PageList<McBasMessageSuccess> findByReceiver(java.lang.String receiver, // 短信接收人
+	public PageList<McBasMessageSuccess> findByReceiver(
+			java.lang.String receiver, // 短信接收人
 			String order, // 排序字段
 			String orderDir, // 排序顺序
 			int pageNum, // 当前分页的页数
@@ -90,7 +94,8 @@ public class McBasMessageSuccessService extends HibernateServiceBase<McBasMessag
 	) {
 		if (receiver != null)
 			receiver = receiver.toLowerCase().trim();
-		return theDao.findByReceiver(receiver, order, orderDir, pageNum, pageSize);
+		return theDao.findByReceiver(receiver, order, orderDir, pageNum,
+				pageSize);
 	}
 
 }

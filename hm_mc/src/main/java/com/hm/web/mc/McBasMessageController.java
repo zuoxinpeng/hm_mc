@@ -32,7 +32,7 @@ import com.hm.util.CommonParam;
  */
 @Winlet("mc/basMcMessage")
 public class McBasMessageController {
-
+	
 	@Autowired
 	private IMcBasMessageService service;
 
@@ -78,7 +78,8 @@ public class McBasMessageController {
 	 */
 	@Window
 	@Return(log = "显示消息中心_短信表信息列表")
-	public String listWin(@RequestParam(value = "searchReceiver", required = false) java.lang.String Receiver,// 短信接收号码多个电话可按照”,”分隔
+	public String listWin(
+			@RequestParam(value = "searchReceiver", required = false) java.lang.String Receiver,// 短信接收号码多个电话可按照”,”分隔
 			@RequestParam(value = "page", required = false) Integer pageId,// 分页参数
 			@RequestParam(value = "sortby", required = false) String sortBy,// 排序字段
 			@RequestParam(value = "sort", required = false) String sort,// 排序顺序
@@ -88,8 +89,8 @@ public class McBasMessageController {
 	) {
 		int pageNum = pageId == null ? 1 : pageId;
 		int pageSize = 10;
-
-		model.addAttribute("basMcMessage", service.findByReceiver(Receiver, sortBy == null ? "createTime" : sortBy, sort == null ? "desc" : sort, pageNum, pageSize));
+		
+		model.addAttribute("basMcMessage", service.findByReceiver(Receiver,sortBy == null ? "createTime" : sortBy, sort == null ? "desc" : sort, pageNum, pageSize));
 		return "listMcMessage";
 	}
 
@@ -121,7 +122,8 @@ public class McBasMessageController {
 	 */
 	@Action
 	@Return(update = "editWin", log = "启动编辑消息中心_短信表信息")
-	public String editBasMcMessage(@RequestParam(value = "messageId") java.lang.Long MessageId,// 短信ID
+	public String editBasMcMessage(
+			@RequestParam(value = "messageId") java.lang.Long MessageId,// 短信ID
 			UserProfile up, // 用户
 			PageStorage ps,// 页面对象
 			HttpServletRequest request // 请求
@@ -146,7 +148,8 @@ public class McBasMessageController {
 	 * @return 前台页面的jspx页面的名字，例如下面的是editMcMessage.jspx
 	 */
 	@Window
-	@Return({ @Code(value = "", log = "消息中心_短信表信息编辑窗口不用显示"),// 提示信息
+	@Return({
+			@Code(value = "", log = "消息中心_短信表信息编辑窗口不用显示"),// 提示信息
 			@Code(value = "new", log = "显示新建消息中心_短信表", view = "editMcMessage", title = "新建消息中心_短信表"),// 提示信息
 			@Code(value = "editMcMessage", log = "显示编辑消息中心_短信表", title = "编辑消息中心_短信表"),// 提示信息
 			@Code(value = "notfound", log = "找不到要编辑的消息中心_短信表", view = "") // 提示信息
@@ -196,9 +199,11 @@ public class McBasMessageController {
 			@Code(value = "error", log = "表单字段校验出错", view = "") // 提示信息
 	})
 	// 验证
-	@Validates({ @Validate(name = "receiver", id = "ne", error = "短信接收号码多个电话可按照”,”分隔不能为空。"),// 短信接收号码多个电话可按照”,”分隔
+	@Validates({
+			@Validate(name = "receiver", id = "ne", error = "短信接收号码多个电话可按照”,”分隔不能为空。"),// 短信接收号码多个电话可按照”,”分隔
 			@Validate(name = "receiver", id = "maxlen", args = { "256" }, error = "短信接收号码多个电话可按照”,”分隔长度不能超过256。"),// 短信接收号码多个电话可按照”,”分隔
-			@Validate(name = "receiver", id = "regexp", args = { "^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$" }, error = "格式不正确"), @Validate(name = "content", id = "ne", error = "短信内容不能为空。"),// 短信内容
+			@Validate(name = "receiver", id = "regexp", args = { "^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$" }, error = "格式不正确"),
+			@Validate(name = "content", id = "ne", error = "短信内容不能为空。"),// 短信内容
 			@Validate(name = "content", id = "maxlen", args = { "2000" }, error = "短信内容长度不能超过2000。") // 短信内容
 	})
 	public String save(@Valid McBasMessage basMcMessage, // 保存校验的对象
@@ -213,7 +218,7 @@ public class McBasMessageController {
 
 		if (v.hasError()) // 提交表单保存消息中心_短信表信息，但是表单中存在数据校验错误
 			return "error";
-
+		
 		CommonParam commparam = new CommonParam();
 
 		basMcMessage.setMessageId((Long) ps.getAttribute(EDIT_KEY));

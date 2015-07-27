@@ -30,7 +30,7 @@ import com.hm.svc.user.IMcBasPiuUserService;
  */
 @Winlet("basMcPiuUser")
 public class McBasPiuUserController {
-	
+
 	@Autowired
 	private IMcBasPiuUserService basMcPiuUserService;
 
@@ -76,8 +76,7 @@ public class McBasPiuUserController {
 	 */
 	@Window
 	@Return(log = "显示消息中心内部用户表信息列表")
-	public String listWin(
-			@RequestParam(value = "searchLoginId", required = false) java.lang.String loginId,// 登陆账号
+	public String listWin(@RequestParam(value = "searchLoginId", required = false) java.lang.String loginId,// 登陆账号
 			@RequestParam(value = "page", required = false) Integer pageId,// 分页参数
 			@RequestParam(value = "sortby", required = false) String sortBy,// 排序字段
 			@RequestParam(value = "sort", required = false) String sort,// 排序顺序
@@ -87,8 +86,7 @@ public class McBasPiuUserController {
 	) {
 		int pageNum = pageId == null ? 1 : pageId;
 		int pageSize = 10;
-		model.addAttribute("basMcPiuUser", basMcPiuUserService.findByLoginId(
-				loginId, sortBy == null ? "createTime" : sortBy, sort == null ? "desc" : sort, pageNum, pageSize));
+		model.addAttribute("basMcPiuUser", basMcPiuUserService.findByLoginId(loginId, sortBy == null ? "createTime" : sortBy, sort == null ? "desc" : sort, pageNum, pageSize));
 		return "listBasMcPiuUser";
 	}
 
@@ -108,8 +106,7 @@ public class McBasPiuUserController {
 	 * @return 前台页面的jspx页面的名字，例如下面的是editBasMcPiuUser.jspx
 	 */
 	@Window
-	@Return({
-			@Code(value = "", log = "消息中心内部用户表信息编辑窗口不用显示"),// 提示信息
+	@Return({ @Code(value = "", log = "消息中心内部用户表信息编辑窗口不用显示"),// 提示信息
 			@Code(value = "new", log = "显示新建消息中心内部用户表", view = "createBasMcPiuUser", title = "新建消息中心内部用户表"),// 提示信息
 			@Code(value = "editBasMcPiuUser", log = "显示编辑消息中心内部用户表", title = "编辑消息中心内部用户表"),// 提示信息
 			@Code(value = "notfound", log = "找不到要编辑的消息中心内部用户表", view = "") // 提示信息
@@ -165,12 +162,10 @@ public class McBasPiuUserController {
 	 * @return 通过 update 转到新建窗口 editWin
 	 */
 	@Action
-	@Return({
-			@Code(value = "", update = "editWin", log = "成功删除消息中心内部用户表信息", msg = "成功删除用户"), // 提示信息
+	@Return({ @Code(value = "", update = "editWin", log = "成功删除消息中心内部用户表信息", msg = "成功删除用户"), // 提示信息
 			@Code(value = "notfound", view = "", log = "找不到要删除的消息中心内部用户表信息") // 提示信息
 	})
-	public String delBasMcPiuUser(
-			@RequestParam(value = "userId") java.lang.Long userId,// 内部用户主键
+	public String delBasMcPiuUser(@RequestParam(value = "userId") java.lang.Long userId,// 内部用户主键
 			UserProfile up, // 用户
 			HttpServletRequest request // 请求
 	) {
@@ -188,8 +183,7 @@ public class McBasPiuUserController {
 	 */
 	@Action
 	@Return(update = "editWin", log = "启动编辑消息中心内部用户表信息")
-	public String editBasMcPiuUser(
-			@RequestParam(value = "userId") java.lang.Long userId,// 内部用户主键
+	public String editBasMcPiuUser(@RequestParam(value = "userId") java.lang.Long userId,// 内部用户主键
 			UserProfile up, // 用户
 			PageStorage ps,// 页面对象
 			HttpServletRequest request // 请求
@@ -212,15 +206,12 @@ public class McBasPiuUserController {
 	 * @return
 	 */
 	@Action
-	@Return({
-			@Code(value = "", log = "成功保存消息中心内部用户表信息编辑", msg = "保存成功", update = "listWin"),// 提示信息
+	@Return({ @Code(value = "", log = "成功保存消息中心内部用户表信息编辑", msg = "保存成功", update = "listWin"),// 提示信息
 			@Code(value = "vf", log = "AJAX表单字段校验", view = ""),// 提示信息
-			@Code(value = "repeat", log = "登陆账号已存在,请重新添加", msg = "登陆账号已存在,请重新添加", view = ""),
-			@Code(value = "error", log = "表单字段校验出错", view = "") // 提示信息
+			@Code(value = "repeat", log = "登陆账号已存在,请重新添加", msg = "登陆账号已存在,请重新添加", view = ""), @Code(value = "error", log = "表单字段校验出错", view = "") // 提示信息
 	})
 	// 验证
-	@Validates({
-			@Validate(name = "userId", id = "ne", error = "内部用户主键不能为空。"),// 内部用户主键
+	@Validates({ @Validate(name = "userId", id = "ne", error = "内部用户主键不能为空。"),// 内部用户主键
 			@Validate(name = "userId", id = "float", error = "内部用户主键必须为数字。"),// 内部用户主键
 			@Validate(name = "loginId", id = "ne", error = "登录账号不能为空。"),// 登录账号
 			@Validate(name = "loginId", id = "maxlen", args = { "256" }, error = "登录账号长度不能超过256。"),// 登录账号
@@ -245,18 +236,18 @@ public class McBasPiuUserController {
 			return "error";
 
 		Long status = ps.getAttribute(EDIT_KEY);
-		
-		if(status <= 0 || status == null){
+
+		if (status == null || status <= 0) {
 			if (basMcPiuUserService.findByLoginId(basMcPiuUser.getLoginId()).size() > 0) {// 如果登陆账号存在则不能添加
 				return "repeat";
-			}else{
+			} else {
 				basMcPiuUser.setUserId((Long) ps.getAttribute(EDIT_KEY));
 				basMcPiuUserService.createOrUpdate(basMcPiuUser);
 				ps.removeAttribute(EDIT_KEY);
 				return "";
 			}
 		}
-		
+
 		basMcPiuUser.setUserId((Long) ps.getAttribute(EDIT_KEY));
 		basMcPiuUserService.createOrUpdate(basMcPiuUser);
 		ps.removeAttribute(EDIT_KEY);

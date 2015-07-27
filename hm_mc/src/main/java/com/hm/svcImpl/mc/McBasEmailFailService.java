@@ -21,7 +21,8 @@ import com.hm.svc.mc.IMcBasEmailFailService;
  */
 @Service
 @Transactional
-public class McBasEmailFailService extends HibernateServiceBase<McBasEmailFail> implements IMcBasEmailFailService {
+public class McBasEmailFailService extends HibernateServiceBase<McBasEmailFail>
+		implements IMcBasEmailFailService {
 	@Autowired
 	private IMcBasEmailFailDao theDao;
 
@@ -77,7 +78,7 @@ public class McBasEmailFailService extends HibernateServiceBase<McBasEmailFail> 
 	) {
 		if (receiver != null)
 			receiver = receiver.toLowerCase().trim();
-		return theDao.findByReceiver(receiver, order, orderDir, pageNum, pageSize);
+		return theDao.findByReceiver(receiver, order, orderDir, pageNum,pageSize);
 	}
 
 }
