@@ -194,7 +194,7 @@
 			<classifier>jdk15</classifier>
 		</dependency>
 
-		<!-- basUtil -->
+		<!-- siyou bao start -->
 		<dependency>
 			<groupId>com.hm</groupId>
 			<artifactId>icebean</artifactId>
@@ -218,6 +218,9 @@
 			<artifactId>mcwinlet</artifactId>
 			<version>0.0.1</version>
 		</dependency>
+		<!-- siyou bao end -->
+
+		<!-- velocity start -->
 
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
@@ -225,13 +228,17 @@
 			<version>1.7</version>
 		</dependency>
 
-		<!-- hession -->
+		<!-- velocity end -->
+
+		<!-- hession start -->
 		<dependency>
 			<groupId>com.caucho</groupId>
 			<artifactId>hessian</artifactId>
 			<version>4.0.7</version>
 		</dependency>
+		<!-- hession end -->
 
+		<!-- quartz start -->
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
@@ -243,15 +250,17 @@
 			<artifactId>quartz-jobs</artifactId>
 			<version>2.2.1</version>
 		</dependency>
+		<!-- quartz end -->
 
+		<!-- HttpUtils start -->
 		<dependency>
 			<groupId>org.codehaus.xfire</groupId>
 			<artifactId>xfire-core</artifactId>
 			<version>1.2.6</version>
 		</dependency>
-		
-		
+		<!-- HttpUtils end -->
 
+		<!-- JsonUtils start -->
 
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
@@ -263,6 +272,8 @@
 			<artifactId>jackson-mapper-lgpl</artifactId>
 			<version>1.9.1</version>
 		</dependency>
+
+		<!-- JsonUtils end -->
 
 	</dependencies>
 	<repositories>
