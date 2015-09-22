@@ -64,30 +64,22 @@ public class McMessageService implements IMcMessageService {
 	IMcBasMessageService basMcMessageService;
 	@Autowired
 	IMcBasEmailService basMcEmailService;
-
 	@Autowired
-	private IMcBasImoService basMcImoService;
-
+	IMcBasImoService basMcImoService;
 	@Autowired
-	private IMcBasImoFailService basMcImoFailService;
-
+	IMcBasImoFailService basMcImoFailService;
 	@Autowired
-	private IMcBasEmailFailService basMcEmailFailService;
-
+	IMcBasEmailFailService basMcEmailFailService;
 	@Autowired
-	private IMcBasMessageFailService basMessageFailService;
-
+	IMcBasMessageFailService basMessageFailService;
 	@Autowired
-	private IMcBasLogService basLogService;
-
+	IMcBasLogService basLogService;
 	@Autowired
-	private IMcBasSystemService basSystemService;
-
+	IMcBasSystemService basSystemService;
 	@Autowired
-	private IMcSysTemplateService sysTemplateService;
-
+	IMcSysTemplateService sysTemplateService;
 	@Autowired
-	private IMcTemplateService mcTemplateService;
+	IMcTemplateService mcTemplateService;
 
 	/**
 	 * 消息中心_短信发送
@@ -394,16 +386,13 @@ public class McMessageService implements IMcMessageService {
 	public void insertFailInfo(BasMcParameters basMcParameters, String messageType, String msg) {
 		// 还有获取标题没有完成，目前参数固定为空
 		if (McConstantUtil.MESSAGETYPE_DX.equals(messageType)) {
-			McBasMessageFail basMcMessageFail = new McBasMessageFail(Converts.strArrayToStr(basMcParameters.getReceiver()), basMcParameters.getContent(), basMcParameters.getKey(), 3L, basMcParameters.getGrpId(), basMcParameters.getmId(), basMcParameters.getsId(), basMcParameters.getTaskType(), msg,
-					Converts.StrToDate(basMcParameters.getSendTime()), new Date(), null);
+			McBasMessageFail basMcMessageFail = new McBasMessageFail(Converts.strArrayToStr(basMcParameters.getReceiver()), basMcParameters.getContent(), basMcParameters.getKey(), 3L, basMcParameters.getGrpId(), basMcParameters.getmId(), basMcParameters.getsId(), basMcParameters.getTaskType(), msg, Converts.StrToDate(basMcParameters.getSendTime()), new Date(), null);
 			basMessageFailService.create(basMcMessageFail);
 		} else if (McConstantUtil.MESSAGETYPE_YJ.equals(messageType)) {
-			McBasEmailFail basMcEmailFail = new McBasEmailFail(Converts.strArrayToStr(basMcParameters.getReceiver()), "", basMcParameters.getContent(), basMcParameters.getKey(), 3L, basMcParameters.getGrpId(), basMcParameters.getTaskType(), msg, Converts.StrToDate(basMcParameters.getSendTime()),
-					new Date(), null);
+			McBasEmailFail basMcEmailFail = new McBasEmailFail(Converts.strArrayToStr(basMcParameters.getReceiver()), "", basMcParameters.getContent(), basMcParameters.getKey(), 3L, basMcParameters.getGrpId(), basMcParameters.getTaskType(), msg, Converts.StrToDate(basMcParameters.getSendTime()), new Date(), null);
 			basMcEmailFailService.create(basMcEmailFail);
 		} else if (McConstantUtil.MESSAGETYPE_IMO.equals(messageType)) {// 这里还需要修改。接收人uid
-			McBasImoFail basImoFail = new McBasImoFail(Converts.strArrayToStr(basMcParameters.getReceiver()), Converts.strArrayToStr(basMcParameters.getReceiver()), "", basMcParameters.getContent(), basMcParameters.getKey(), 3L, basMcParameters.getGrpId(), msg, Converts.StrToDate(basMcParameters
-					.getSendTime()), new Date(), null);
+			McBasImoFail basImoFail = new McBasImoFail(Converts.strArrayToStr(basMcParameters.getReceiver()), Converts.strArrayToStr(basMcParameters.getReceiver()), "", basMcParameters.getContent(), basMcParameters.getKey(), 3L, basMcParameters.getGrpId(), msg, Converts.StrToDate(basMcParameters.getSendTime()), new Date(), null);
 			basMcImoFailService.create(basImoFail);
 		}
 	}
@@ -483,5 +472,23 @@ public class McMessageService implements IMcMessageService {
 		basLogService.insertBasMcLog(new McBasLog(msg));
 		// 记录日志
 		logger.info(msg);
+	}
+
+	public void sendFailWarn() {
+		ArrayList<BasMcParameters> mcParametersList = new ArrayList<BasMcParameters>();
+		BasMcParameters basMcParameters = new BasMcParameters();
+		Map<String, String> map = new HashMap<String, String>();
+		ArrayList<String> receiver = new ArrayList<String>();
+		
+		receiver.add(ResponseBundleForConf.getStringCode("SYS_MAIL_WARN_ADDRESS"));
+		basMcParameters.setSystemId(ResponseBundleForConf.getStringCode("SYS_CODE"));
+		basMcParameters.setSystemPw(ResponseBundleForConf.getStringCode("SYS_PASS"));
+		basMcParameters.setTemplateCode(ResponseBundleForConf.getStringCode("SYS_WARN_CODE"));
+		basMcParameters.setParametersMap(map);
+		basMcParameters.setReceiver(receiver);
+		basMcParameters.setMessageType(McConstantUtil.MESSAGETYPE_YJ);
+		mcParametersList.add(basMcParameters);
+
+		sendMcMessage(mcParametersList);
 	}
 }
